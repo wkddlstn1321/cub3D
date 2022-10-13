@@ -3,6 +3,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "./mlx/mlx.h"
 # include "./libft/libft.h"
 
@@ -34,7 +35,7 @@ typedef struct s_map
 {
 	int			p_count;
 	char		p_spawn;
-	char		**map;
+	char		**map_info;
 	t_texture	*texture;
 	t_rgb		*rgb;
 }	t_map;
