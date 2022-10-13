@@ -34,7 +34,7 @@ typedef struct s_rgb
 typedef struct s_map
 {
 	int			p_count;
-	char		p_spawn;
+	6
 	char		**map_info;
 	t_texture	*texture;
 	t_rgb		*rgb;

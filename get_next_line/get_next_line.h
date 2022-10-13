@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjung <hyunjung@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyunjung <hyunjung@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 14:21:30 by hyunjung          #+#    #+#             */
-/*   Updated: 2022/01/12 16:50:02 by hyunjung         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:47:26 by hyunjung         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# define BUFFER_SIZE 42
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
