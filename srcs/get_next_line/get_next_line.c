@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjung <hyunjung@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyunjung <hyunjung@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 14:21:17 by hyunjung          #+#    #+#             */
-/*   Updated: 2022/01/12 16:50:07 by hyunjung         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:26:52 by hyunjung         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_reset_lstr(char *lstr)
 {
@@ -80,7 +80,7 @@ char	*ft_get_lstr(int fd, char *lstr)
 	}
 	result = 1;
 	while (ft_strchr(lstr, '\n') == 0 && result != 0)
-	{	
+	{
 		result = read(fd, buffer, BUFFER_SIZE);
 		if (result == -1)
 		{
@@ -88,7 +88,7 @@ char	*ft_get_lstr(int fd, char *lstr)
 			return (0);
 		}
 		buffer[result] = 0;
-		lstr = ft_strjoin(lstr, buffer);
+		lstr = gnl_ft_strjoin(lstr, buffer);
 	}
 	free(buffer);
 	return (lstr);

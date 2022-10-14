@@ -6,6 +6,7 @@
 # include <fcntl.h>
 # include "./mlx/mlx.h"
 # include "./libft/libft.h"
+# include "get_next_line.h"
 
 # define MAP_EXTENSION				".cub"
 
@@ -34,10 +35,12 @@ typedef struct s_rgb
 typedef struct s_map
 {
 	int			p_count;
-	6
 	char		**map_info;
 	t_texture	*texture;
 	t_rgb		*rgb;
+	int			w;
+	int			h;
+
 }	t_map;
 
 int		ft_error(char *str);

@@ -13,7 +13,7 @@ ifeq ($(DEBUG), TRUE)
 endif
 
 SRC_PATH = srcs/
-SRC_FILES = main.c util.c
+SRC_FILES = main.c util.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC_FILES))
 OBJS = $(patsubst %.c,%.o,$(SRCS))

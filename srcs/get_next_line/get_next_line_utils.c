@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjung <hyunjung@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyunjung <hyunjung@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 14:21:28 by hyunjung          #+#    #+#             */
-/*   Updated: 2022/01/12 12:58:53 by hyunjung         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:27:04 by hyunjung         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_strchr(const char *str, int c)
 {
@@ -36,22 +36,8 @@ char	*ft_strchr(const char *str, int c)
 	return (0);
 }
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-	size_t	cnt;
 
-	i = 0;
-	cnt = 0;
-	while (str[i] != 0)
-	{
-		i++;
-		cnt++;
-	}
-	return (cnt);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		i;
