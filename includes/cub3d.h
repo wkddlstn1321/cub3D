@@ -10,6 +10,16 @@
 
 # define MAP_EXTENSION				".cub"
 
+typedef enum e_arg_types
+{
+	E_NO = 0,
+	E_SO,
+	E_EA,
+	E_WE,
+	E_F,
+	E_C
+}	t_arg_types;
+
 typedef struct s_player
 {
 	double	x;
@@ -28,19 +38,21 @@ typedef struct s_texture
 
 typedef struct s_rgb
 {
-	int	f[3];
-	int	s[3];
+	int	floor[3];
+	int	ceiling[3];
 }	t_rgb;
 
 typedef struct s_map
 {
 	int			p_count;
+	int			a_count[6];
 	char		**map_info;
+	char		**arg_info;
 	t_texture	*texture;
 	t_rgb		*rgb;
 	int			w;
 	int			h;
-
+	int			location;
 }	t_map;
 
 int		ft_error(char *str);
