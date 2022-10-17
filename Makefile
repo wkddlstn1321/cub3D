@@ -14,7 +14,7 @@ endif
 
 SRC_PATH = srcs/
 SRC_FILES = main.c util.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c\
-		init_contents.c join_contents.c
+		init_contents.c join_contents.c set_arg.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC_FILES))
 OBJS = $(patsubst %.c,%.o,$(SRCS))

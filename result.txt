@@ -1,0 +1,185 @@
+test_FC1.cub
+Success
+
+============
+test_FC10.cub
+Success
+
+============
+test_FC11.cub
+Error
+rgb value error
+
+============
+test_FC12.cub
+Error
+rgb value error
+
+============
+test_FC13.cub
+Error
+rgb value error
+
+============
+test_FC14.cub
+Error
+len error
+
+============
+test_FC2.cub
+Error
+rgb value error
+
+============
+test_FC3.cub
+Success
+
+============
+test_FC4.cub
+Error
+rgb value error
+
+============
+test_FC5.cub
+Error
+len error
+
+============
+test_FC6.cub
+Error
+len error
+
+============
+test_FC7.cub
+Success
+
+============
+test_FC8.cub
+Success
+
+============
+test_FC9.cub
+Success
+
+============
+test_MAP1.cub
+Error
+len error
+
+============
+test_MAP10.cub
+Error
+len error
+
+============
+test_MAP11.cub
+Error
+len error
+
+============
+test_MAP12.cub
+Error
+len error
+
+============
+test_MAP13.cub
+Error
+len error
+
+============
+test_MAP14.cub
+Error
+len error
+
+============
+test_MAP15.cub
+Error
+len error
+
+============
+test_MAP16.cub
+Success
+
+============
+test_MAP17.cub
+Error
+len error
+
+============
+test_MAP18.cub
+Error
+len error
+
+============
+test_MAP19.cub
+Success
+
+============
+test_MAP2.cub
+Error
+len error
+
+============
+test_MAP20.cub
+Success
+
+============
+test_MAP21.cub
+Success
+
+============
+test_MAP22.cub
+Success
+
+============
+test_MAP23.cub
+Success
+
+============
+test_MAP24.cub
+Success
+
+============
+test_MAP25.cub
+Error
+len error
+
+============
+test_MAP26.cub
+Error
+len error
+
+============
+test_MAP27.cub
+Error
+len error
+
+============
+test_MAP28.cub
+Error
+len error
+
+============
+test_MAP29.cub
+Error
+len error
+
+============
+test_MAP3.cub
+Error
+len error
+
+============
+test_MAP30.cub
+Error
+len error
+
+============
+test_MAP31.cub
+Error
+len error
+
+============
+test_MAP32.cub
+Error
+len error

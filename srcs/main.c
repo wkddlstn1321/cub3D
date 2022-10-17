@@ -1,15 +1,5 @@
 #include "includes/cub3d.h"
 
-void	set_arg_info(char *str[])
-{
-	str[E_NO] = "NO ";
-	str[E_SO] = "SO ";
-	str[E_EA] = "EA ";
-	str[E_WE] = "WE ";
-	str[E_F] = "F ";
-	str[E_C] = "C ";
-}
-
 // 미로 내부 값들 확인
 int	check_news(t_map *map)
 {
@@ -208,17 +198,17 @@ int	main(int ac, char **av)
 	file_name = av[1];
 	check_extension(file_name);
 	contents = init_contents(file_name);
-	for (int i = 0 ; contents[i] ; i++)
-		printf("%s", contents[i]);
-	system("leaks cub3D");
-	map.p_count = 0;
-	set_map_height_width(file_name, &map);
-	map.map_info = malloc(sizeof(char *) * (map.h + 1));
-	if (map.map_info == NULL)
-		exit(1);
-	map.map_info[map.h] = NULL;
+	map.texture = ft_calloc(sizeof(char *), 5);
+	map.rgb = ft_calloc(sizeof(int *), 2);
+	set_arg(contents, &map);
+	// system("leaks cub3D");
+	// map.p_count = 0;
+	// set_map_height_width(file_name, &map);
+	// map.map_info = malloc(sizeof(char *) * (map.h + 1));
+	// if (map.map_info == NULL)
+	// 	exit(1);
+	// map.map_info[map.h] = NULL;
 	// set_map(file_name, &map);
-	// set_arg(file_name, &map);
 	// if (check_border(&map) || check_news(&map))
 	// 	return (ft_error("map error"));
 	printf("Success\n");
