@@ -1,5 +1,15 @@
 #include "includes/cub3d.h"
 
+void	set_arg_info(char *str[])
+{
+	str[E_NO] = "NO ";
+	str[E_SO] = "SO ";
+	str[E_EA] = "EA ";
+	str[E_WE] = "WE ";
+	str[E_F] = "F ";
+	str[E_C] = "C ";
+}
+
 // 미로 내부 값들 확인
 int	check_news(t_map *map)
 {
@@ -112,46 +122,6 @@ int	check_border(t_map *map)
 // 	}
 // }
 
-// map의 maze를 제외한 인자들 먼저 확인
-void	set_arg(char *map_dir, t_map *map)
-{
-	int		fd;
-	char	*line;
-	char	**maze;
-
-	fd = open(map_dir, O_RDONLY);
-	if (fd == -1)
-		ft_error("File can't open this time\n");
-	maze = map->arg_info;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		if (!ft_strncmp(line, "NO ", 3))
-		{
-			if (map->a_count[E_NO] == 0)
-			{
-				map->a_count[E_NO] = 1;
-				//a.cnt++;
-			}
-			else
-				//error
-		}
-			map->a_count++;
-		else if (!ft_strncmp(line, "SO ", 3))
-			map->a_count++;
-		else if (!ft_strncmp(line, "EA ", 3))
-			map->a_count++;
-		else if (!ft_strncmp(line, "WE ", 3))
-			map->a_count++;
-		else if (!ft_strncmp(line, "F ", 2))
-			map->a_count++;
-		else if (!ft_strncmp(line, "C ", 2))
-			map->a_count++;
-	}
-}
-
 //maze 오른쪽이 딱 맞게
 void	ft_converter(char *line)
 {
@@ -230,22 +200,27 @@ void	set_map_height_width(char *map_dir, t_map *map)
 int	main(int ac, char **av)
 {
 	char	*file_name;
+	char	**contents;
 	t_map	map;
 
 	if (ac != 2)
 		return (ft_error("Wrong arguments  [./cub3D] [*.cub]"));
 	file_name = av[1];
 	check_extension(file_name);
+	contents = init_contents(file_name);
+	for (int i = 0 ; contents[i] ; i++)
+		printf("%s", contents[i]);
+	system("leaks cub3D");
 	map.p_count = 0;
-	ft_memset(map.a_count, 0, sizeof(map.a_count));
 	set_map_height_width(file_name, &map);
 	map.map_info = malloc(sizeof(char *) * (map.h + 1));
 	if (map.map_info == NULL)
 		exit(1);
 	map.map_info[map.h] = NULL;
 	// set_map(file_name, &map);
-	if (check_border(&map) || check_news(&map))
-		return (ft_error("map error"));
+	// set_arg(file_name, &map);
+	// if (check_border(&map) || check_news(&map))
+	// 	return (ft_error("map error"));
 	printf("Success\n");
 	return (0);
 }

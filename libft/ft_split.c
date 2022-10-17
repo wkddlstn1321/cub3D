@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daskim <daskim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: insjang <insjang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 19:55:35 by jeoan             #+#    #+#             */
-/*   Updated: 2022/09/30 16:41:09 by daskim           ###   ########.fr       */
+/*   Updated: 2022/10/17 12:30:38 by insjang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 static size_t	ft_count_field(const char *s, char c)
 {
 	size_t	n;

@@ -45,9 +45,7 @@ typedef struct s_rgb
 typedef struct s_map
 {
 	int			p_count;
-	int			a_count[6];
 	char		**map_info;
-	char		**arg_info;
 	t_texture	*texture;
 	t_rgb		*rgb;
 	int			w;
@@ -57,5 +55,7 @@ typedef struct s_map
 
 int		ft_error(char *str);
 void	check_extension(char *dir);
+char	**init_contents(char *file_name);
+char	**join_contents(char **arr, char *str);
 
 #endif
