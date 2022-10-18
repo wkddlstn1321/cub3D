@@ -4,7 +4,7 @@ int	ft_error(char *str)
 {
 	printf("Error\n");
 	printf("%s\n", str);
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	return (1);
 }
 

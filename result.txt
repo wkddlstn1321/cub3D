@@ -25,7 +25,7 @@ rgb value error
 ============
 test_FC14.cub
 Error
-len error
+more comma very comma !!
 
 ============
 test_FC2.cub
@@ -69,31 +69,38 @@ rgb is null
 
 ============
 test_MAP1.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP10.cub
-Success
+Error
+map error
 
 ============
 test_MAP11.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP12.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP13.cub
-Success
+Error
+map error
 
 ============
 test_MAP14.cub
-Success
+Error
+not surround wall
 
 ============
 test_MAP15.cub
-Success
+Error
+map error
 
 ============
 test_MAP16.cub
@@ -102,11 +109,13 @@ texture is null
 
 ============
 test_MAP17.cub
-Success
+Error
+map error
 
 ============
 test_MAP18.cub
-Success
+Error
+map error
 
 ============
 test_MAP19.cub
@@ -115,7 +124,8 @@ texture is null
 
 ============
 test_MAP2.cub
-Success
+Error
+map error
 
 ============
 test_MAP20.cub
@@ -124,91 +134,113 @@ texture is null
 
 ============
 test_MAP21.cub
-Success
+Error
+map error
 
 ============
 test_MAP22.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP23.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP24.cub
-Success
+Error
+map error
 
 ============
 test_MAP25.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP26.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP27.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP28.cub
-Success
+Error
+not surround wall
 
 ============
 test_MAP29.cub
-Success
+Error
+map error
 
 ============
 test_MAP3.cub
-Success
+Error
+map error
 
 ============
 test_MAP30.cub
-Success
+Error
+map error
 
 ============
 test_MAP31.cub
-Success
+Error
+map error
 
 ============
 test_MAP32.cub
-Success
+Error
+map error
 
 ============
 test_MAP33.cub
-Success
+Error
+map error
 
 ============
 test_MAP34.cub
-Success
+Error
+not surround wall
 
 ============
 test_MAP35.cub
-Success
+Error
+map error
 
 ============
 test_MAP4.cub
-Success
+Error
+not surround wall
 
 ============
 test_MAP5.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP6.cub
-Success
+Error
+map arg only [1] [0] ... [E]
 
 ============
 test_MAP7.cub
-Success
+Error
+map error
 
 ============
 test_MAP8.cub
-Success
+Error
+map error
 
 ============
 test_MAP9.cub
-Success
+Error
+map error
 
 ============
 test_W1.cub
@@ -247,7 +279,7 @@ len error
 ============
 test_bonus_map.cub
 Error
-rgb value error
+more comma very comma !!
 
 ============
 test_valid_map.cub

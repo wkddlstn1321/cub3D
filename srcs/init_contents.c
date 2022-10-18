@@ -53,8 +53,10 @@ char	**init_contents(char *file_name)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
+		ft_converter(line);
 		contents = join_contents(contents, line);
 	}
+	close(fd);
 	if (!contents)
 		exit(ft_error("empty file"));
 	return (contents);

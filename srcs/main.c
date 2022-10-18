@@ -16,25 +16,17 @@ int	check_news(t_map *map)
 		{
 			if (y != map->h && x != map->w
 				&& (maze[y][x] == ' ' || maze[y][x] == '1'))
+				;
+			else if (y != map->h && x != map->w && (maze[y][x] == '0'
+				|| maze[y][x] == 'E' || maze[y][x] == 'W'
+				|| maze[y][x] == 'S' || maze[y][x] == 'N'))
 			{
-				x++;
-				continue ;
-				// ???/
-			}
-			else if (y != map->h && x != map->w && (maze[y][x] == 'N' || maze[y][x] == 'E'
-				|| maze[y][x] == 'W' || maze[y][x] == 'S' || maze[y][x] == '0'))
-			{
-				if (maze[y + 1][x] == ' ')
-					return (1);
-				else if (maze[y - 1][x] == ' ')
-					return (1);
-				else if (maze[y][x + 1] == ' ')
-					return (1);
-				else if (maze[y][x - 1] == ' ')
-					return (1);
+				if (maze[y + 1][x] == ' ' || maze[y - 1][x] == ' '
+				|| maze[y][x + 1] == ' ' || maze[y][x - 1] == ' ')
+					exit(ft_error("not surround wall"));
 			}
 			else
-				return (1);
+				exit(ft_error("map arg only [1] [0] ... [E]"));
 			x++;
 		}
 		y++;
@@ -46,30 +38,26 @@ int	check_news(t_map *map)
 int	check_border(t_map *map)
 {
 	int		y;
-	int		width;
-	int		height;
-	char	*line;
+	int		x;
 	char	**maze;
 
-	width = map->w;
-	height = map->h;
 	maze = map->map_info;
 	y = 0;
 	while (maze[y] != NULL)
 	{
-		line = maze[y];
-		if (y == 0 || y == (height - 1))
+		x = 0;
+		if (y == 0 || y == (map->h - 1))
 		{
-			while (*line != '\0')
+			while (maze[y][x] != '\0')
 			{
-				if (*line != ' ' && *line != '1')
+				if (maze[y][x] != ' ' && maze[y][x] != '1')
 					return (1);
-				line++;
+				x++;
 			}
 		}
 		else
-			if ((line[0] != '1' && line[0] != ' ')
-				|| (line[width - 1] != '1' && line[width - 1] != ' '))
+			if ((maze[y][0] != '1' && maze[y][0] != ' ')
+				|| (maze[y][map->w - 1] != '1' && maze[y][map->w - 1] != ' '))
 				return (1);
 		y++;
 	}
@@ -77,40 +65,23 @@ int	check_border(t_map *map)
 }
 
 // 미로 세팅 및 map 인자 체크 할 에정
-// void set_map(char *map_dir, t_map *map)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	char	**maze;
+void	fuck_set_map(char **contents, t_map *map)
+{
+	int		i;
 
-// 	fd = open(map_dir, O_RDONLY);
-// 	if (fd == -1)
-// 		ft_error("File can't open this time\n");
-// 	maze = map->map_info;
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line == NULL)
-// 			break ;
-// 		if (*line == ' ' || *line == '1')
-// 			exit(ft_error("Map is first"));
-// 		else
-// 		{
-// 			if (check_arg(map))
-// 			{
-// 				*maze = malloc(sizeof(char) * (map->w + 1));
-// 				if (*maze == NULL)
-// 					exit(1);
-// 				(*maze)[map->w] = '\0';
-// 				ft_memset(*maze, ' ', map->w);
-// 				ft_memcpy(*maze, line, ft_strlen(line));
-// 				maze++;
-// 			}
-// 			else
-// 				exit(ft_error("Argument Error"));
-// 		}
-// 	}
-// }
+	i = 0;
+	while (contents[i] != NULL)
+	{
+		map->map_info[i] = malloc(sizeof(char) * (map->w + 1));
+		if (map->map_info[i] == NULL)
+			exit(ft_error("malloc error"));
+		(map->map_info[i])[map->w] = '\0';
+		ft_memset(map->map_info[i], ' ', map->w);
+		ft_memcpy(map->map_info[i],
+			contents[i], ft_strlen(contents[i]));
+		i++;
+	}
+}
 
 //maze 오른쪽이 딱 맞게
 void	ft_converter(char *line)
@@ -124,44 +95,33 @@ void	ft_converter(char *line)
 }
 
 //maze의 높이와 가로길이 확인
-void	set_map_height_width(char *map_dir, t_map *map)
+void	set_map_height_width(t_map *map, char **contents)
 {
 	int		i;
-	int		fd;
-	int		height;
-	int		width;
-	char	*line;
 	int		tmp;
 
-	fd = open(map_dir, O_RDONLY);
-	if (fd == -1)
-		exit(ft_error("Failed To Open File\n"));
-	width = 0;
-	height = 0;
-	while (1)
+	map->h = get_arr_len(contents);
+	map->map_info = calloc(sizeof(char *), (map->h + 1));
+	if (map->map_info == NULL)
+		exit(ft_error("malloc error"));
+	tmp = 0;
+	while (*contents != NULL)
 	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		ft_converter(line);
-		tmp = ft_strlen(line);
-		if (tmp > width)
-			width = tmp;
+		tmp = ft_strlen(*contents);
+		if (tmp > map->w)
+			map->w = tmp;
 		i = 0;
-		while (line[i])
+		while ((*contents)[i])
 		{
-			if (line[i] == 'N' || line[i] == 'E' || line[i] == 'W' || line[i] == 'S')
+			if ((*contents)[i] == 'N' || (*contents)[i] == 'E'
+				|| (*contents)[i] == 'W' || (*contents)[i] == 'S')
 				map->p_count++;
 			i++;
 		}
-		free(line);
-		height++;
+		contents++;
 	}
 	if (map->p_count != 1)
 		exit (ft_error("map error"));
-	close(fd);
-	map->w = width;
-	map->h = height;
 }
 // TEST*/
 
@@ -187,6 +147,16 @@ void	set_map_height_width(char *map_dir, t_map *map)
 
 */
 
+void	set_map(t_map *map)
+{
+	map->texture = ft_calloc(sizeof(char *), 5);
+	map->rgb = ft_calloc(sizeof(int *), 2);
+	map->p_count = 0;
+	map->idx = 0;
+	map->h = 0;
+	map->w = 0;
+}
+
 int	main(int ac, char **av)
 {
 	char	*file_name;
@@ -198,19 +168,12 @@ int	main(int ac, char **av)
 	file_name = av[1];
 	check_extension(file_name);
 	contents = init_contents(file_name);
-	map.texture = ft_calloc(sizeof(char *), 5);
-	map.rgb = ft_calloc(sizeof(int *), 2);
-	set_arg(contents, &map);
-	// system("leaks cub3D");
-	// map.p_count = 0;
-	// set_map_height_width(file_name, &map);
-	// map.map_info = malloc(sizeof(char *) * (map.h + 1));
-	// if (map.map_info == NULL)
-	// 	exit(1);
-	// map.map_info[map.h] = NULL;
-	// set_map(file_name, &map);
-	// if (check_border(&map) || check_news(&map))
-	// 	return (ft_error("map error"));
+	set_map(&map);
+	map.idx = set_arg(contents, &map);
+	set_map_height_width(&map, &(contents[map.idx]));
+	fuck_set_map(&(contents[map.idx]), &map);
+	if (check_border(&map) || check_news(&map))
+		return (ft_error("map error"));
 	printf("Success\n");
 	return (0);
 }
