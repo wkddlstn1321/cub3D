@@ -75,7 +75,7 @@ map arg only [1] [0] ... [E]
 ============
 test_MAP10.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP11.cub
@@ -90,7 +90,7 @@ map arg only [1] [0] ... [E]
 ============
 test_MAP13.cub
 Error
-map error
+too many players
 
 ============
 test_MAP14.cub
@@ -100,7 +100,7 @@ not surround wall
 ============
 test_MAP15.cub
 Error
-map error
+too many players
 
 ============
 test_MAP16.cub
@@ -110,12 +110,12 @@ texture is null
 ============
 test_MAP17.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP18.cub
 Error
-map error
+too many players
 
 ============
 test_MAP19.cub
@@ -125,7 +125,7 @@ texture is null
 ============
 test_MAP2.cub
 Error
-map error
+too many players
 
 ============
 test_MAP20.cub
@@ -135,7 +135,7 @@ texture is null
 ============
 test_MAP21.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP22.cub
@@ -150,7 +150,7 @@ map arg only [1] [0] ... [E]
 ============
 test_MAP24.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP25.cub
@@ -175,32 +175,32 @@ not surround wall
 ============
 test_MAP29.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP3.cub
 Error
-map error
+too many players
 
 ============
 test_MAP30.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP31.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP32.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP33.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP34.cub
@@ -210,7 +210,7 @@ not surround wall
 ============
 test_MAP35.cub
 Error
-map error
+too many players
 
 ============
 test_MAP4.cub
@@ -230,17 +230,17 @@ map arg only [1] [0] ... [E]
 ============
 test_MAP7.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP8.cub
 Error
-map error
+border errrrrr
 
 ============
 test_MAP9.cub
 Error
-map error
+border errrrrr
 
 ============
 test_W1.cub

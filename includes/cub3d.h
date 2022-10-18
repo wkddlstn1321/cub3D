@@ -40,7 +40,6 @@ typedef struct s_map
 	int		**rgb;
 	int		w;
 	int		h;
-	int		idx;
 }	t_map;
 
 int		ft_error(char *str);
@@ -50,4 +49,6 @@ int		set_arg(char **contents, t_map *map);
 int		get_arr_len(char **arr);
 void	ft_converter(char *line);
 void	check_type(t_map *map, char **arr);
+void	set_map(t_map *map, char **contents);
+
 #endif
