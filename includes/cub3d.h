@@ -32,27 +32,12 @@ typedef struct s_player
 	double	v_y;
 }	t_player;
 
-// typedef struct s_texture
-// {
-// 	char	*no;
-// 	char	*so;
-// 	char	*we;
-// 	char	*ea;
-// }	t_texture;
-
-typedef struct s_rgb
-{
-	int	floor[3];
-	int	ceiling[3];
-}	t_rgb;
-
 typedef struct s_map
 {
 	int		p_count;
 	char	**map_info;
 	char	**texture;
 	int		**rgb;
-	// t_rgb	*rgb;
 	int		w;
 	int		h;
 	int		location;
@@ -61,8 +46,8 @@ typedef struct s_map
 int		ft_error(char *str);
 void	check_extension(char *dir);
 char	**init_contents(char *file_name);
-char	**join_contents(char **arr, char *str);
 int		set_arg(char **contents, t_map *map);
+int		get_arr_len(char **arr);
 void	ft_converter(char *line);
 
 #endif

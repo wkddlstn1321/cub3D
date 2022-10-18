@@ -1,19 +1,21 @@
 test_FC1.cub
-Success
+Error
+rgb is null
 
 ============
 test_FC10.cub
-Success
+Error
+rgb is null
 
 ============
 test_FC11.cub
 Error
-rgb value error
+len error
 
 ============
 test_FC12.cub
 Error
-rgb value error
+len error
 
 ============
 test_FC13.cub
@@ -32,7 +34,8 @@ rgb value error
 
 ============
 test_FC3.cub
-Success
+Error
+rgb value error
 
 ============
 test_FC4.cub
@@ -47,81 +50,77 @@ len error
 ============
 test_FC6.cub
 Error
-len error
+dup error
 
 ============
 test_FC7.cub
-Success
+Error
+rgb is null
 
 ============
 test_FC8.cub
-Success
+Error
+rgb is null
 
 ============
 test_FC9.cub
-Success
+Error
+rgb is null
 
 ============
 test_MAP1.cub
-Error
-len error
+Success
 
 ============
 test_MAP10.cub
-Error
-len error
+Success
 
 ============
 test_MAP11.cub
-Error
-len error
+Success
 
 ============
 test_MAP12.cub
-Error
-len error
+Success
 
 ============
 test_MAP13.cub
-Error
-len error
+Success
 
 ============
 test_MAP14.cub
-Error
-len error
+Success
 
 ============
 test_MAP15.cub
-Error
-len error
+Success
 
 ============
 test_MAP16.cub
-Success
+Error
+texture is null
 
 ============
 test_MAP17.cub
-Error
-len error
+Success
 
 ============
 test_MAP18.cub
-Error
-len error
+Success
 
 ============
 test_MAP19.cub
-Success
+Error
+texture is null
 
 ============
 test_MAP2.cub
-Error
-len error
+Success
 
 ============
 test_MAP20.cub
-Success
+Error
+texture is null
 
 ============
 test_MAP21.cub
@@ -141,45 +140,117 @@ Success
 
 ============
 test_MAP25.cub
-Error
-len error
+Success
 
 ============
 test_MAP26.cub
-Error
-len error
+Success
 
 ============
 test_MAP27.cub
-Error
-len error
+Success
 
 ============
 test_MAP28.cub
-Error
-len error
+Success
 
 ============
 test_MAP29.cub
-Error
-len error
+Success
 
 ============
 test_MAP3.cub
-Error
-len error
+Success
 
 ============
 test_MAP30.cub
-Error
-len error
+Success
 
 ============
 test_MAP31.cub
+Success
+
+============
+test_MAP32.cub
+Success
+
+============
+test_MAP33.cub
+Success
+
+============
+test_MAP34.cub
+Success
+
+============
+test_MAP35.cub
+Success
+
+============
+test_MAP4.cub
+Success
+
+============
+test_MAP5.cub
+Success
+
+============
+test_MAP6.cub
+Success
+
+============
+test_MAP7.cub
+Success
+
+============
+test_MAP8.cub
+Success
+
+============
+test_MAP9.cub
+Success
+
+============
+test_W1.cub
+Error
+texture is null
+
+============
+test_W2.cub
+Error
+texture dup error
+
+============
+test_W3.cub
 Error
 len error
 
 ============
-test_MAP32.cub
+test_W4.cub
+Success
+
+============
+test_W5.cub
+Error
+texture is null
+
+============
+test_W6.cub
+Error
+texture is null
+
+============
+test_W7.cub
 Error
 len error
+
+============
+test_bonus_map.cub
+Error
+rgb value error
+
+============
+test_valid_map.cub
+Success
+
+============

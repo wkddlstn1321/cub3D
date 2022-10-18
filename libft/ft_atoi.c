@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeoan <jeoan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: taeheonk <taeheonk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 08:29:35 by jeoan             #+#    #+#             */
-/*   Updated: 2021/11/23 02:29:32 by jeoan            ###   ########.fr       */
+/*   Updated: 2022/10/18 11:36:40 by taeheonk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,28 @@ static int	ft_isspace(int c)
 		|| c == '\f' || c == '\r' || c == ' ');
 }
 
-static long	ft_minimal_strtol(const char *str)
+int	ft_atoi(const char *str)
 {
-	signed long		sign;
 	unsigned long	num;
-	unsigned long	temp;
+	int				sign;
 
-	sign = 1;
 	num = 0;
+	sign = 1;
 	while (ft_isspace(*str))
 		str++;
-	if (*str == '+' || *str == '-')
+	if ((*str == '+' || *str == '-') && *str + 1 != '\0')
 	{
 		if (*str == '-')
 			sign = -1;
 		str++;
 	}
+	if (ft_strlen(str) > 10)
+		return (-1);
 	while (ft_isdigit(*str))
-	{
-		temp = num;
 		num = num * 10 + (*str++ - '0');
-		if (sign == 1 && (num >= LONG_MAX || num / 10 != temp))
-			return (LONG_MAX);
-		if (sign == -1 && (num >= -(unsigned long)LONG_MIN || num / 10 != temp))
-			return (LONG_MIN);
-	}
-	return (sign * (signed long)num);
-}
-
-int	ft_atoi(const char *str)
-{
-	return ((int)ft_minimal_strtol(str));
+	if (*str != '\0')
+		return (-1);
+	if ((num > 2147483647 && sign == 1) || (num > 2147483648 && sign == -1))
+		return (-1);
+	return ((signed long)num * sign);
 }
