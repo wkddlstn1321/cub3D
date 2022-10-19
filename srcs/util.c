@@ -5,7 +5,17 @@ int	ft_error(char *str)
 	printf("Error\n");
 	printf("%s\n", str);
 	// system("leaks cub3D");
-	return (1);
+	return (1); 
+}
+
+void	ft_converter(char *line)
+{
+	while (*line)
+	{
+		if (*line == '\n')
+			*line = '\0';
+		line++;
+	}
 }
 
 void	check_extension(char *dir)
@@ -23,4 +33,14 @@ void	check_extension(char *dir)
 		if (!ft_strncmp(extension, MAP_EXTENSION, extension_len))
 			return ;
 	exit(ft_error("Map Extension Is Wrong"));
+}
+
+int	get_arr_len(char **arr)
+{
+	int	len;
+
+	len = 0;
+	while (arr != NULL && arr[len] != NULL)
+		len++;
+	return (len);
 }

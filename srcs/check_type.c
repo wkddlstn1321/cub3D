@@ -1,6 +1,6 @@
 #include "includes/cub3d.h"
 
-void	comma_check(char *str)
+static void	check_comma(char *str)
 {
 	int	flag;
 
@@ -47,7 +47,7 @@ static void	set_rgb(char **arr, int **rgb, t_rgb_types type)
 		exit(ft_error("len error"));
 	if (rgb[type] == NULL)
 	{
-		comma_check(arr[1]);
+		check_comma(arr[1]);
 		rgb[type] = malloc(sizeof(int) * 3);
 		split = ft_split(arr[1], ',');
 		if (get_arr_len(split) != 3)

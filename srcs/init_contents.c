@@ -46,7 +46,7 @@ char	**init_contents(char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		exit(ft_error("Failed To Open File\n"));
+		exit(ft_error("Failed To Open File"));
 	contents = NULL;
 	while (1)
 	{

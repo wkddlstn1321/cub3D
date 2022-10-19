@@ -58,16 +58,6 @@ void	check_border(t_map *map)
 	}
 }
 
-void	ft_converter(char *line)
-{
-	while (*line)
-	{
-		if (*line == '\n')
-			*line = '\0';
-		line++;
-	}
-}
-
 int	main(int ac, char **av)
 {
 	char	*file_name;
