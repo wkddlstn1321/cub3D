@@ -9,6 +9,9 @@
 # include "get_next_line.h"
 
 # define MAP_EXTENSION				".cub"
+# define SCREEN_WIDTH	1920
+# define SCREEN_HEIGHT	1080
+# define GRID_SIZE	128
 
 typedef enum e_texture_types
 {
@@ -50,5 +53,6 @@ int		get_arr_len(char **arr);
 void	ft_converter(char *line);
 void	check_type(t_map *map, char **arr);
 void	set_map(t_map *map, char **contents);
-
+//test
+void execute_mlx();
 #endif

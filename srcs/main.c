@@ -73,5 +73,6 @@ int	main(int ac, char **av)
 	check_border(&map);
 	check_news(map.map_info, map.w, map.h);
 	printf("Success\n");
+	execute_mlx();
 	return (0);
 }

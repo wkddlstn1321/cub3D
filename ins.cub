@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO /Users/hyunjung/cub3D/imgs/dogeye.XPM
+SO /Users/hyunjung/cub3D/imgs/dogeye.XPM
+WE /Users/hyunjung/cub3D/imgs/dogeye.XPM
+EA /Users/hyunjung/cub3D/imgs/dogeye.XPM
 
 F 220,90,15
 C 225,30,0
