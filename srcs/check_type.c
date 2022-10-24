@@ -28,7 +28,6 @@ static void	set_texture(char **arr, char **texture, t_texture_types type)
 		exit(ft_error("len error"));
 	if (texture[type] == NULL)
 	{
-		ft_converter(arr[1]);
 		texture[type] = arr[1];
 		return ;
 	}
