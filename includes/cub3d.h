@@ -7,6 +7,7 @@
 # include "./mlx/mlx.h"
 # include "./libft/libft.h"
 # include "get_next_line.h"
+#include <math.h>
 
 # define MAP_EXTENSION				".cub"
 # define SCREEN_WIDTH	1920
@@ -27,22 +28,27 @@ typedef enum e_rgb_types
 	E_C
 }	t_rgb_types;
 
-typedef struct s_player
+typedef struct s_vector
 {
 	double	x;
 	double	y;
-	double	v_x;
-	double	v_y;
+}	t_vector;
+
+typedef struct s_player
+{
+	t_vector	pos;
+	char		dir;
 }	t_player;
 
 typedef struct s_map
 {
-	int		p_count;
-	char	**map_info;
-	char	**texture;
-	int		**rgb;
-	int		w;
-	int		h;
+	int			p_count;
+	char		**map_info;
+	char		**texture;
+	int			**rgb;
+	int			w;
+	int			h;
+	t_player	player;
 }	t_map;
 
 int		ft_error(char *str);
@@ -54,5 +60,6 @@ void	ft_converter(char *line);
 void	check_type(t_map *map, char **arr);
 void	set_map(t_map *map, char **contents);
 //test
-void execute_mlx();
+void execute_mlx(double dis, int xpos);
+void	dda(t_map *map);
 #endif
