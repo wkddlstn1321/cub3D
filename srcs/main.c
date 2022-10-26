@@ -1,5 +1,32 @@
 #include "includes/cub3d.h"
 
+void	check_player_dir(t_map *map)
+{
+	int		y;
+	int		x;
+	char	**maze;
+
+	maze = map->map_info;
+	y = 0;
+	while (maze[y] != NULL)
+	{
+		x = 0;
+		while (maze[y][x] != '\0')
+		{
+			if (maze[y][x] == 'N' || maze[y][x] == 'E'
+				|| maze[y][x] == 'W' || maze[y][x] == 'S')
+			{
+				map->player.pos.y = y;
+				map->player.pos.x = x;
+				map->player.dir = maze[y][x];
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 // 미로 내부 값들 확인
 void	check_news(char **info, int w, int h)
 {
@@ -72,6 +99,9 @@ int	main(int ac, char **av)
 	set_map(&map, contents);
 	check_border(&map);
 	check_news(map.map_info, map.w, map.h);
+	check_player_dir(&map);
 	printf("Success\n");
+	dda(&map);
+	// execute_mlx();
 	return (0);
 }

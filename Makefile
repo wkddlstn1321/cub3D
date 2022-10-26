@@ -11,10 +11,13 @@ MAKE = make
 ifeq ($(DEBUG), TRUE)
 	CFLAGS -= -Werror
 endif
+#head
+HEAD = ./includes/cub3d.h
 
 SRC_PATH = srcs/
 SRC_FILES = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c\
-		main.c util.c init_contents.c set_arg.c check_type.c set_map.c
+		main.c util.c init_contents.c set_arg.c check_type.c set_map.c execute_dda.c\
+		test.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC_FILES))
 OBJS = $(patsubst %.c,%.o,$(SRCS))
@@ -22,7 +25,7 @@ OBJS = $(patsubst %.c,%.o,$(SRCS))
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(HEAD)
 	$(MAKE) -C $(LIBFTPATH) BONUS_RULE=TRUE all
 	$(CC) $(CFLAGS) $(LINK) $(OBJS) -o $@
 
