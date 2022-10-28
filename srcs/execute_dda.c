@@ -162,6 +162,8 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 		between.y = (map_y + 1) - map->player.pos.y;
 		step.y = 1;
 	}
+	else if (ray_dir.y == 0)
+		step.y = 0;
 	else
 	{
 		between.y = map->player.pos.y - map_y;
@@ -175,6 +177,10 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	start_side_dis.y = side.y;
 	while (hit == 0)
 	{
+		if (delta.y == 0)
+		{
+			side.y = side.x + 1;
+		}
 		if (side.x <= side.y)
 		{
 			side.x += delta.x;
@@ -238,12 +244,12 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 		// printf("%f\n", distan);
 		// printf("Y : (%d - %f + (1 - %f)/2) / %f = %f\n", map_y, map->player.pos.y, step.y, ray_dir.y, distan);
 	}
-	if (ray_dir.y == 0)
-	{
-		printf("%f %d %d\n", map->player.pos.x, map_y, map_x);
-		if (step.x == -1)
-			distan = map->player.pos.x - map_x;
-	}
+	// if (ray_dir.y == 0)
+	// {
+	// 	printf("%f %d %d\n", map->player.pos.x, map_y, map_x);
+	// 	if (step.x == -1)
+	// 		distan = map->player.pos.x - map_x;
+	// }
 	// printf("%f\n", distan);
 		// distan = 10;
 	// }	// hit_po = map->player.pos.y;
