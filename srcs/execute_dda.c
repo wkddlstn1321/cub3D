@@ -36,32 +36,47 @@ int	stop_game(void)
 	exit(1);
 }
 
-int	on_key_press(int key, t_map *map)
+int	on_key_press(int key, t_map *map, t_vector dir)
 {
 	if (rotSpeed > 360)
 		rotSpeed = 0;
+	// if (key == E_D)
+	// 	rotSpeed += 0.1;
+	// if (key == E_A)
+	// 	rotSpeed -= 0.1;
 	if (key == E_D)
-		rotSpeed += 0.1;
+		map->player.pos.y += 0.1;
 	if (key == E_A)
-		rotSpeed -= 0.1;
+		map->player.pos.y -= 0.1;
 	if (key == E_W)
+	{
 		map->player.pos.x += 0.1;
+		map->player.pos.y += 0.1;
+	}
 	if (key == E_S)
-		map->player.pos.x -= 0.1;
+	{
+		map->player.pos.x -= dir;
+		map->player.pos.y -= 0.1;
+	}
+	if (key == 123)
+		rotSpeed += 0.1;
+	if (key == 124)
+		rotSpeed -= 0.1;
 	mlx_clear_window(mlx, mlx_win);
 	main_loop(map);
 	return(0);
 }
 
-int		find_color(t_new_img *dog, int w, int row, int h)
+int		find_color(t_new_img *dog, int w, int line_h, int a)
 {
 	int color;
-	int height = dog->y;
-	int width = dog->x;
-	int result_row = (height * row) / h;
+	(void)a;
+	(void)line_h;
+	// int height = dog->y;
+	// int result_row = (a * dog->y) / line_h;
 	// int result_col = (width * w) / SCREEN_WIDTH;
 	(void)w;
-	color = dog->img_set[width * result_row + w];
+	color = dog->img_set[w + 1 * dog->size_line / 4];
 	// color = dog->img_set[dog->y * ];
 	return (color);
 }
@@ -110,8 +125,9 @@ void	verLine(int x, int drawStart, int drawEnd)
 	int a = 0;
 	for (int i = 0 ; i < SCREEN_HEIGHT ; i++)
 	{
-		if (i >= drawStart && i <= drawEnd)
+		if (i > drawStart && i < drawEnd)
 		{
+			// img_data[x + i * size_line / 4] = find_color(&dog, w, line_h, a);
 			img_data[x + i * size_line / 4] = 0x0FFF00;
 			// img_data[x + i * size_line / 4] = find_color(&dog, x, a, drawEnd - drawStart);
 			a++;
@@ -135,19 +151,16 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	int			map_y;
 	int			cc;
 
-	// printf("ray x %f ray y %f\n", ray_dir.x, ray_dir.y);
 	hit = 0;
 	map_x = (int)(map->player.pos.x);
 	map_y = (int)(map->player.pos.y);
-	// delta.x = 1;
-	// delta.y = 1;
 	delta.x = fabs(sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2)) / ray_dir.x);
 	delta.y = fabs(sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2)) / ray_dir.y);
-	if (ray_dir.y == INFINITY)
-		ray_dir.y = 0;
-	if (ray_dir.x == INFINITY)
-		ray_dir.x = 0;
-	if (ray_dir.x > 0)
+
+	// delta.x = (ray_dir.y == 0) ? 0 : ((ray_dir.x == 0) ? 1 : fabs(sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2))));
+	// delta.y = (ray_dir.x == 0) ? 0 : ((ray_dir.y == 0) ? 1 : fabs(sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2))));
+
+	if (ray_dir.x >= 0)
 	{
 		between.x = (map_x + 1) - map->player.pos.x;
 		step.x = 1;
@@ -157,13 +170,11 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 		between.x = map->player.pos.x - map_x;
 		step.x = -1;
 	}
-	if (ray_dir.y > 0)
+	if (ray_dir.y >= 0)
 	{
 		between.y = (map_y + 1) - map->player.pos.y;
 		step.y = 1;
 	}
-	else if (ray_dir.y == 0)
-		step.y = 0;
 	else
 	{
 		between.y = map->player.pos.y - map_y;
@@ -177,10 +188,6 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	start_side_dis.y = side.y;
 	while (hit == 0)
 	{
-		if (delta.y == 0)
-		{
-			side.y = side.x + 1;
-		}
 		if (side.x <= side.y)
 		{
 			side.x += delta.x;
@@ -227,39 +234,60 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	// verLine(x, drawStart, drawEnd);
 	//test made in insjang
 
-
 	double distan;
 	// double hit_po;
+	double new_dis;
 	if (cc == 0)
 	{
 		distan = side.x - delta.x;
 		distan *= 1 / sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2));
+		// printf("%.53f %.53f %.55f\n",sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2)), ray_dir.x, ray_dir.y);
+		new_dis = (map_x - map->player.pos.x + (1 - step.x) / 2) / ray_dir.x;
+		// if (ray_dir.y == 0)
+		// 	printf("%.53f\n", distan);
+		// if (ray_dir.y < -0.470 && ray_dir.y > -0.472)
+		// 	printf("sideX  : %f  deltaX : %f  raydirY : %f \n",side.x, delta.x, ray_dir.y);
 		// printf("%f\n", distan);
 	}
 	else
 	{
 		distan = side.y - delta.y;
 		distan *= 1 / sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2));
+		// printf("ㅇㅜ리꺼 distany = %f\n", distan);
+		new_dis = (map_y - map->player.pos.y + (1 - step.y) / 2) / ray_dir.y;
+		// printf("nam꺼 distany = %f\n", distan);
 		// printf("Y : %f * %f / %f = ", distan, ray_dir.y, sqrt(ray_dir.x*ray_dir.x+ray_dir.y*ray_dir.y));
 		// printf("%f\n", distan);
 		// printf("Y : (%d - %f + (1 - %f)/2) / %f = %f\n", map_y, map->player.pos.y, step.y, ray_dir.y, distan);
 	}
+	// if (distan != new_dis)
+	// 	printf("dis : %.22f  new : %.22f\n", distan, new_dis);
+	// if (ray_dir.y < 0)
+	// 	printf("ray : %f dis : %f \n", ray_dir.y, distan);
 	// if (ray_dir.y == 0)
 	// {
 	// 	printf("%f %d %d\n", map->player.pos.x, map_y, map_x);
 	// 	if (step.x == -1)
-	// 		distan = map->player.pos.x - map_x;
+	// 		distan = map->player.pos.x - map_x - 1;
 	// }
 	// printf("%f\n", distan);
 		// distan = 10;
 	// }	// hit_po = map->player.pos.y;
-	// if (distan == 1)
-	// 	printf("it is 1\n");
+	distan *= (1 << 16);
+	distan = round(distan);
+	distan /= (1 << 16);
+	// printf("%.53f ? %.53f\n", distan, new_dis);
 	int	line_h = (int)(SCREEN_HEIGHT / distan);
-	int drawStart = -line_h / 2 + SCREEN_HEIGHT / 2;
+	// int	line_h2 = (int)(SCREEN_HEIGHT / new_dis);
+	// int w = (int)((distan * ray_dir.x / ray_dir.y) - map_x) * dog.x;
+	// if (line_h != line_h2)
+	// 	printf("dis : %.16f newdis : %.16f line : %d line2 : %d\n", distan, new_dis, line_h, line_h2);
+	// if (ray_dir.y < -0.470 && ray_dir.y > -0.472)
+	// 	printf("ray : %f line : %f dis : %f \n", ray_dir.y, line_h, distan);
+	int drawStart = SCREEN_HEIGHT / 2 - (line_h / 2);
 	if (drawStart < 0)
 		drawStart = 0;
-	int drawEnd = line_h / 2 + SCREEN_HEIGHT / 2;
+	int drawEnd = SCREEN_HEIGHT / 2 + (line_h / 2);
 	if (drawEnd > SCREEN_HEIGHT)
 		drawEnd = SCREEN_HEIGHT;
 	verLine(x, drawStart, drawEnd);
@@ -330,7 +358,6 @@ int	main_loop(t_map *map)
 
 void	dda(t_map *map)
 {
-	//231312
 	// t_new_img dog;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "insjang");
@@ -357,7 +384,7 @@ void	dda(t_map *map)
 	// t_vector	ray_dir;
 	// int			x;
 
-	// dir.x = -1;
+	// dir.x = -1; 
 	// dir.y = 0;
 	// plane.x = 0;
 	// plane.y = 0.66;
@@ -381,11 +408,10 @@ void	dda(t_map *map)
 	// 	x++;
 	// }
 	main_loop(map);
-	mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
-
-	// mlx_loop_hook(mlx, &main_loop, map);
+	mlx_loop_hook(mlx, &main_loop, map);
 	mlx_hook(mlx_win, 17, 0, stop_game, 0);
 	mlx_hook(mlx_win, 2, 0, on_key_press, map);
+	mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
 	mlx_loop(mlx);
 }
 
