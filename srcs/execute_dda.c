@@ -36,14 +36,10 @@ int	stop_game(void)
 	exit(1);
 }
 
-int	on_key_press(int key, t_map *map, t_vector dir)
+int	on_key_press(int key, t_map *map)
 {
 	if (rotSpeed > 360)
 		rotSpeed = 0;
-	// if (key == E_D)
-	// 	rotSpeed += 0.1;
-	// if (key == E_A)
-	// 	rotSpeed -= 0.1;
 	if (key == E_D)
 		map->player.pos.y += 0.1;
 	if (key == E_A)
@@ -55,73 +51,20 @@ int	on_key_press(int key, t_map *map, t_vector dir)
 	}
 	if (key == E_S)
 	{
-		map->player.pos.x -= dir;
+		// map->player.pos.x -= dir;
 		map->player.pos.y -= 0.1;
 	}
-	if (key == 123)
+	if (key == E_RIGHT)
 		rotSpeed += 0.1;
-	if (key == 124)
+	if (key == E_LEFT)
 		rotSpeed -= 0.1;
 	mlx_clear_window(mlx, mlx_win);
 	main_loop(map);
 	return(0);
 }
 
-int		find_color(t_new_img *dog, int w, int line_h, int a)
-{
-	int color;
-	(void)a;
-	(void)line_h;
-	// int height = dog->y;
-	// int result_row = (a * dog->y) / line_h;
-	// int result_col = (width * w) / SCREEN_WIDTH;
-	(void)w;
-	color = dog->img_set[w + 1 * dog->size_line / 4];
-	// color = dog->img_set[dog->y * ];
-	return (color);
-}
-
-void	execute_mlx(double dis, int xpos, double hit_po)
-{
-	(void)dis;
-	double	w;
-	while (hit_po > 1)
-	{
-		hit_po -= 1;
-	}
-	(void)xpos;
-	w = hit_po * 64;
-	printf("w %f\n", w);
-	dis *= (1/sqrt(12*12+16*16))*SCREEN_HEIGHT;
-	// (void)xpos;
-	int	text_h = SCREEN_HEIGHT - dis * 2;
-	if (text_h < 0)
-		text_h = 0;
-	int h = 0;
-	for (int i = 0 ; i < SCREEN_HEIGHT ; i++)
-	{
-		if (i < SCREEN_HEIGHT - dis && i > dis)
-		{	
-			// img_data[xpos + i * size_line / 4] = find_color(&dog, w, h, text_h + 1);
-			h++;
-		}
-			// img_data[xpos + i * size_line / 4] = 0xaFFF00FF;
-	}
-	// for (int j = 0 ; j < SCREEN_HEIGHT ; j++)
-	// {
-	// 	for (int i = 0; i < SCREEN_WIDTH ; i++)
-	// 		img_data[i + j * size_line / 4] = find_color(&dog, i, j, 0);
-	// }
-	// mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
-	// mlx_hook(mlx_win, 17, 0, stop_game, 0);
-	// mlx_hook(mlx_win, 3, 0, on_key_press, 0);
-	// mlx_loop(mlx);
-}
-
-//made by insjang test func
 void	verLine(int x, int drawStart, int drawEnd)
 {
-	// printf("%d %d\n", drawStart, drawEnd);
 	int a = 0;
 	for (int i = 0 ; i < SCREEN_HEIGHT ; i++)
 	{
@@ -129,16 +72,10 @@ void	verLine(int x, int drawStart, int drawEnd)
 		{
 			// img_data[x + i * size_line / 4] = find_color(&dog, w, line_h, a);
 			img_data[x + i * size_line / 4] = 0x0FFF00;
-			// img_data[x + i * size_line / 4] = find_color(&dog, x, a, drawEnd - drawStart);
 			a++;
 		}
-		// if (i < SCREEN_HEIGHT - dis && i > dis)
-		// {	
-			// img_data[xpos + i * size_line / 4] = find_color(&dog, w, h, text_h + 1);
-		// }
 	}
 }
-
 
 double	execute(t_map *map, t_vector ray_dir, int x)
 {
@@ -156,10 +93,6 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	map_y = (int)(map->player.pos.y);
 	delta.x = fabs(sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2)) / ray_dir.x);
 	delta.y = fabs(sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2)) / ray_dir.y);
-
-	// delta.x = (ray_dir.y == 0) ? 0 : ((ray_dir.x == 0) ? 1 : fabs(sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2))));
-	// delta.y = (ray_dir.x == 0) ? 0 : ((ray_dir.y == 0) ? 1 : fabs(sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2))));
-
 	if (ray_dir.x >= 0)
 	{
 		between.x = (map_x + 1) - map->player.pos.x;
@@ -205,85 +138,25 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 			hit = 1;
 		}
 	}
-	//test made in insjang
-	// double	perp_dist;
-	// if (cc == 0)
-	// {
-	// 	perp_dist = (map_x - map->player.pos.x + (1 - step.x) / 2) / ray_dir.x;
-	// 	if (perp_dist < 0)
-	// 	{
-	// 		printf("%d - %.10f + (1 - %.10f)/2 / %.10f = ",map_x, map->player.pos.x, step.x, ray_dir.x);
-	// 	}
-	// }
-	// else
-	// {
-	// 	perp_dist = (map_y - map->player.pos.y + (1 - step.y) / 2) / ray_dir.y;
-	// 	if (perp_dist < 0)
-	// 	{
-	// 		printf("%d - %.10f + (1 - %.10f)/2 / %.10f = ", map_y, map->player.pos.y, step.y, ray_dir.y);
-	// 	}
-	// }
-	// printf("%f\n", perp_dist);
-	// int	line_h = (int)(SCREEN_HEIGHT / perp_dist);
-	// int drawStart = -line_h / 2 + SCREEN_HEIGHT / 2;
-	// if (drawStart < 0)
-	// 	drawStart = 0;
-	// int drawEnd = line_h / 2 + SCREEN_HEIGHT / 2;
-	// if (drawEnd >= SCREEN_HEIGHT)
-	// 	drawEnd = SCREEN_HEIGHT - 1;
-	// verLine(x, drawStart, drawEnd);
-	//test made in insjang
 
 	double distan;
-	// double hit_po;
 	double new_dis;
 	if (cc == 0)
 	{
 		distan = side.x - delta.x;
 		distan *= 1 / sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2));
-		// printf("%.53f %.53f %.55f\n",sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2)), ray_dir.x, ray_dir.y);
 		new_dis = (map_x - map->player.pos.x + (1 - step.x) / 2) / ray_dir.x;
-		// if (ray_dir.y == 0)
-		// 	printf("%.53f\n", distan);
-		// if (ray_dir.y < -0.470 && ray_dir.y > -0.472)
-		// 	printf("sideX  : %f  deltaX : %f  raydirY : %f \n",side.x, delta.x, ray_dir.y);
-		// printf("%f\n", distan);
 	}
 	else
 	{
 		distan = side.y - delta.y;
 		distan *= 1 / sqrt(pow(ray_dir.x, 2) + pow(ray_dir.y, 2));
-		// printf("ㅇㅜ리꺼 distany = %f\n", distan);
 		new_dis = (map_y - map->player.pos.y + (1 - step.y) / 2) / ray_dir.y;
-		// printf("nam꺼 distany = %f\n", distan);
-		// printf("Y : %f * %f / %f = ", distan, ray_dir.y, sqrt(ray_dir.x*ray_dir.x+ray_dir.y*ray_dir.y));
-		// printf("%f\n", distan);
-		// printf("Y : (%d - %f + (1 - %f)/2) / %f = %f\n", map_y, map->player.pos.y, step.y, ray_dir.y, distan);
 	}
-	// if (distan != new_dis)
-	// 	printf("dis : %.22f  new : %.22f\n", distan, new_dis);
-	// if (ray_dir.y < 0)
-	// 	printf("ray : %f dis : %f \n", ray_dir.y, distan);
-	// if (ray_dir.y == 0)
-	// {
-	// 	printf("%f %d %d\n", map->player.pos.x, map_y, map_x);
-	// 	if (step.x == -1)
-	// 		distan = map->player.pos.x - map_x - 1;
-	// }
-	// printf("%f\n", distan);
-		// distan = 10;
-	// }	// hit_po = map->player.pos.y;
 	distan *= (1 << 16);
 	distan = round(distan);
 	distan /= (1 << 16);
-	// printf("%.53f ? %.53f\n", distan, new_dis);
 	int	line_h = (int)(SCREEN_HEIGHT / distan);
-	// int	line_h2 = (int)(SCREEN_HEIGHT / new_dis);
-	// int w = (int)((distan * ray_dir.x / ray_dir.y) - map_x) * dog.x;
-	// if (line_h != line_h2)
-	// 	printf("dis : %.16f newdis : %.16f line : %d line2 : %d\n", distan, new_dis, line_h, line_h2);
-	// if (ray_dir.y < -0.470 && ray_dir.y > -0.472)
-	// 	printf("ray : %f line : %f dis : %f \n", ray_dir.y, line_h, distan);
 	int drawStart = SCREEN_HEIGHT / 2 - (line_h / 2);
 	if (drawStart < 0)
 		drawStart = 0;
@@ -291,22 +164,6 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	if (drawEnd > SCREEN_HEIGHT)
 		drawEnd = SCREEN_HEIGHT;
 	verLine(x, drawStart, drawEnd);
-			// hit_po = side.x * between.y / start_side_dis.y + map->player.pos.y;
-		// printf("y -> %f * %f / %f + %f === %f\n",side.x, between.y, start_side_dis.y, map->player.pos.y,hit_po);
-		// printf("map x : %d map : y %d distanx %f\n", y, map_y, side.x);
-// 	execute_mlx(side.x, x, hit_po);
-	// }
-	// else if (cc == 1)
-	// {
-	// 	side.y -= delta.y;
-	// 	if (start_side_dis.y == 0)
-	// 		hit_po = map->player.pos.x;
-	// 	else
-	// 		hit_po = side.y * between.x / start_side_dis.x + map->player.pos.x;
-	// 	printf("x -> %f * %f / %f + %f === %f\n",side.x, between.y, start_side_dis.y, map->player.pos.y,hit_po);
-	// 	// printf("map x : %d map : y %d distany %f\n", map_x, map_y, side.y);
-	// 	execute_mlx(side.y, x, hit_po);
-	// }
 	(void)x;
 	return (0);
 }
@@ -324,7 +181,6 @@ int	main_loop(t_map *map)
 				img_data[i + (j * size_line / 4)] = (225 * 255 * 255) + (30 * 255) + 0;
 		}
 	}
-	//testes
 	t_vector	dir;
 	t_vector	plane;
 	t_vector	ray_dir;
@@ -348,11 +204,9 @@ int	main_loop(t_map *map)
 		double camerax = 2 * x / (double)SCREEN_WIDTH - 1;
 		ray_dir.x = camerax * plane.x + dir.x;
 		ray_dir.y = camerax * plane.y + dir.y;
-		// printf("ray x %f ray y %f\n",ray_dir.x, ray_dir.y);
 		execute(map, ray_dir, x);
 		x++;
 	}
-	
 	return (0);
 }
 
@@ -360,7 +214,7 @@ void	dda(t_map *map)
 {
 	// t_new_img dog;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "insjang");
+	mlx_win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	dog.endian = 0;
 	dog.size_line = 0;
 	dog.bits_per_pixel = 0;
@@ -368,45 +222,6 @@ void	dda(t_map *map)
 	dog.img_set = (int *)mlx_get_data_addr(dog.img, &dog.bits_per_pixel, &dog.size_line, &dog.endian);
 	new_win = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img_data = (int *)mlx_get_data_addr(new_win, &bits_per_pixel, &size_line, &endian);
-	// for (int j = 0 ; j < SCREEN_HEIGHT ; j++)
-	// {
-	// 	for (int i = 0; i < SCREEN_WIDTH ; i++)
-	// 	{
-	// 		if (j < SCREEN_HEIGHT / 2)
-	// 			img_data[i + (j * size_line / 4)] = (220 << 16) + (90 << 8) + 15;
-	// 		else
-	// 			img_data[i + (j * size_line / 4)] = (225 * 255 * 255) + (30 * 255) + 0;
-	// 	}
-	// }
-	// //testes
-	// t_vector	dir;
-	// t_vector	plane;
-	// t_vector	ray_dir;
-	// int			x;
-
-	// dir.x = -1; 
-	// dir.y = 0;
-	// plane.x = 0;
-	// plane.y = 0.66;
-
-	// //rotate
-	// double rotSpeed = 90;
-	// dir.x = dir.x * cos(rotSpeed) - dir.y * sin(rotSpeed);
-	// dir.y = -1 * sin(rotSpeed) + dir.y * cos(rotSpeed);
-	// plane.x = plane.x * cos(rotSpeed) - plane.y * sin(rotSpeed);
-	// plane.y = 0 * sin(rotSpeed) + plane.y * cos(rotSpeed);
-	// //rotate
-	
-	// x = 0;
-	// while (x < SCREEN_WIDTH)
-	// {
-	// 	double camerax = 2 * x / (double)SCREEN_WIDTH - 1;
-	// 	ray_dir.x = camerax * plane.x + dir.x;
-	// 	ray_dir.y = camerax * plane.y + dir.y;
-	// 	// printf("ray x %f ray y %f\n",ray_dir.x, ray_dir.y);
-	// 	execute(map, ray_dir, x);
-	// 	x++;
-	// }
 	main_loop(map);
 	mlx_loop_hook(mlx, &main_loop, map);
 	mlx_hook(mlx_win, 17, 0, stop_game, 0);
@@ -414,4 +229,3 @@ void	dda(t_map *map)
 	mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
 	mlx_loop(mlx);
 }
-

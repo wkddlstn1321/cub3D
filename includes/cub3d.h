@@ -20,6 +20,8 @@ typedef enum e_key_types
 	E_S = 1,
 	E_A = 2,
 	E_D = 0,
+	E_RIGHT = 123,
+	E_LEFT = 124,
 }	t_key_types;
 typedef enum e_texture_types
 {
