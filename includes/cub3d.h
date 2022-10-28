@@ -14,6 +14,13 @@
 # define SCREEN_HEIGHT	1080
 # define GRID_SIZE	128
 
+typedef enum e_key_types
+{
+	E_W = 13,
+	E_S = 1,
+	E_A = 2,
+	E_D = 0,
+}	t_key_types;
 typedef enum e_texture_types
 {
 	E_NO = 0,
@@ -60,6 +67,6 @@ void	ft_converter(char *line);
 void	check_type(t_map *map, char **arr);
 void	set_map(t_map *map, char **contents);
 //test
-void execute_mlx(double dis, int xpos);
+void	execute_mlx(double dis, int xpos, double hit_po);
 void	dda(t_map *map);
 #endif
