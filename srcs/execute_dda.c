@@ -3,8 +3,7 @@
 void *mlx_win;
 void *mlx;
 void *new_win;
-void *img;
-char *img_path = "/Users/insjang/cub3D/imgs/dogeye.XPM";
+char *img_path = "./imgs/dogeye.XPM";
 int x;
 int y;
 double rotSpeed;

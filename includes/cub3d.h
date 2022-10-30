@@ -60,6 +60,14 @@ typedef struct s_map
 	t_player	player;
 }	t_map;
 
+typedef struct s_info
+{
+	void		*mlx;
+	void		*mlx_win;
+	void		*new_win;
+	void		*img;
+} t_info;
+
 int		ft_error(char *str);
 void	check_extension(char *dir);
 char	**init_contents(char *file_name);
