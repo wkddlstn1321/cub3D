@@ -68,13 +68,13 @@ static void	set_rgb(char **arr, int **rgb, t_rgb_types type)
 void	check_type(t_map *map, char **arr)
 {
 	if (ft_strcmp("NO", arr[0]) == 0)
-		set_texture(arr, map->texture, E_NO);
+		set_texture(arr, map->texture_path, E_NO);
 	else if (ft_strcmp("SO", arr[0]) == 0)
-		set_texture(arr, map->texture, E_SO);
+		set_texture(arr, map->texture_path, E_SO);
 	else if (ft_strcmp("EA", arr[0]) == 0)
-		set_texture(arr, map->texture, E_EA);
+		set_texture(arr, map->texture_path, E_EA);
 	else if (ft_strcmp("WE", arr[0]) == 0)
-		set_texture(arr, map->texture, E_WE);
+		set_texture(arr, map->texture_path, E_WE);
 	else if (ft_strncmp(arr[0], "F", 2) == 0)
 		set_rgb(arr, map->rgb, E_F);
 	else if (ft_strcmp("C", arr[0]) == 0)

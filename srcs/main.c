@@ -1,87 +1,43 @@
 #include "includes/cub3d.h"
 
-void	check_player_dir(t_map *map)
+// void	set_img(t_new_img img, int	**texture)
+// {
+// 	void	*img_set;
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	texture = ft_calloc(sizeof(int *), img.y);
+// 	if (texture == NULL)
+// 		exit(ft_error("malloc error"));
+// 	img_set = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.size_line, &img.endian);
+// 	while (i < img.y)
+// 	{
+// 		j = 0;
+// 		texture[i] = malloc(sizeof(int) * img.x);
+// 		while (j < img.x)
+// 		{
+// 			texture[i][j] = 456;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
+
+void	save_img_data(t_map *map)
 {
-	int		y;
-	int		x;
-	char	**maze;
-
-	maze = map->map_info;
-	y = 0;
-	while (maze[y] != NULL)
+	int			i;
+	t_new_img	img;
+	
+	i = 0;
+	while (i < 4)
 	{
-		x = 0;
-		while (maze[y][x] != '\0')
-		{
-			if (maze[y][x] == 'N' || maze[y][x] == 'E'
-				|| maze[y][x] == 'W' || maze[y][x] == 'S')
-			{
-				map->player.pos.y = y;
-				map->player.pos.x = x;
-				map->player.dir = maze[y][x];
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-// 미로 내부 값들 확인
-void	check_news(char **info, int w, int h)
-{
-	int		x;
-	int		y;
-
-	y = 1;
-	while (info[y])
-	{
-		x = 1;
-		while (info[y][x] != '\0')
-		{
-			if (y != h && x != w && (info[y][x] == ' ' || info[y][x] == '1'))
-				;
-			else if (y != h && x != w && (info[y][x] == '0' || info[y][x] == 'E'
-				|| info[y][x] == 'W' || info[y][x] == 'S' || info[y][x] == 'N'))
-			{
-				if (info[y + 1][x] == ' ' || info[y - 1][x] == ' '
-				|| info[y][x + 1] == ' ' || info[y][x - 1] == ' ')
-					exit(ft_error("not surround wall"));
-			}
-			else
-				exit(ft_error("map arg only [1] [0] ... [E]"));
-			x++;
-		}
-		y++;
-	}
-}
-
-//미로 테두리 확인
-void	check_border(t_map *map)
-{
-	int		y;
-	int		x;
-	char	**maze;
-
-	maze = map->map_info;
-	y = 0;
-	while (maze[y] != NULL)
-	{
-		x = 0;
-		if (y == 0 || y == (map->h - 1))
-		{
-			while (maze[y][x] != '\0')
-			{
-				if (maze[y][x] != ' ' && maze[y][x] != '1')
-					exit(ft_error("border errrrrr"));
-				x++;
-			}
-		}
-		else
-			if ((maze[y][0] != '1' && maze[y][0] != ' ')
-				|| (maze[y][map->w - 1] != '1' && maze[y][map->w - 1] != ' '))
-				exit(ft_error("border errrrrr"));
-		y++;
+		img.img = mlx_xpm_file_to_image(map->mlx, map->texture_path[i], &img.x, &img.y);
+		if (img.img == NULL)
+			exit(ft_error("wrong texture_path path"));
+		// set_img(img, map->texture_path[i]);
+		mlx_destroy_image(map->mlx, img.img);
+		i++;
 	}
 }
 
@@ -99,7 +55,8 @@ int	main(int ac, char **av)
 	set_map(&map, contents);
 	check_border(&map);
 	check_news(map.map_info, map.w, map.h);
-	check_player_dir(&map);
+	set_player_pos(&map);
+	// save_img_data(&map);
 	printf("Success\n");
 	dda(&map);
 	// execute_mlx();

@@ -44,3 +44,8 @@ int	get_arr_len(char **arr)
 		len++;
 	return (len);
 }
+
+double	ft_dtor(double degree)
+{
+	return (degree * M_PI / 180);
+}

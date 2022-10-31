@@ -15,7 +15,7 @@ static	void	init_map_info(char **contents, t_map *map)
 		map->map_info[i] = malloc(sizeof(char) * (map->w + 1));
 		if (map->map_info[i] == NULL)
 			exit(ft_error("malloc error"));
-		(map->map_info[i])[map->w] = '\0';
+ 		(map->map_info[i])[map->w] = '\0';
 		ft_memset(map->map_info[i], ' ', map->w);
 		ft_memcpy(map->map_info[i],
 			contents[i], ft_strlen(contents[i]));
@@ -71,11 +71,17 @@ void	set_map(t_map *map, char **contents)
 {
 	int	map_start_idx;
 
-	map->texture = ft_calloc(sizeof(char *), 5);
+	map->texture_path = ft_calloc(sizeof(char *), 5);
 	map->rgb = ft_calloc(sizeof(int *), 2);
 	map_start_idx = set_arg(contents, map);
 	map->h = get_arr_len(&(contents[map_start_idx]));
 	map->w = get_max_width(&(contents[map_start_idx]));
 	map->p_count = get_p_count(&(contents[map_start_idx]));
 	init_map_info(&(contents[map_start_idx]), map);
+	
+	//test
+	// map->mlx = mlx_init();
+	// map->mlx_win = mlx_new_window(map->mlx,
+	// 		SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
+	//test
 }

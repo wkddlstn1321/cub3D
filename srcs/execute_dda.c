@@ -6,20 +6,9 @@ void *new_win;
 char *img_path = "./imgs/dogeye.XPM";
 int x;
 int y;
-double rotSpeed;
 
 int	main_loop(t_map *map);
 
-typedef struct s_new_img
-{
-	void	*img;
-	int		*img_set;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	int		x;
-	int		y;
-}	t_new_img;
 
 t_new_img dog;
 
@@ -37,29 +26,42 @@ int	stop_game(void)
 
 int	on_key_press(int key, t_map *map)
 {
-	if (rotSpeed > 360)
-		rotSpeed = 0;
+	if (map->player.angle > 360 * (M_PI / 180))
+		map->player.angle = 0;
+	else if (map->player.angle < 0)
+		map->player.angle = 360 * (M_PI / 180);
 	if (key == E_D)
-		map->player.pos.y += 0.1;
+	{
+		map->player.pos.x += get_move_x(map->player.dir, 90) * 0.1;
+		map->player.pos.y += get_move_y(map->player.dir, 90) * 0.1;
+	}
 	if (key == E_A)
-		map->player.pos.y -= 0.1;
+	{
+		map->player.pos.x -= get_move_x(map->player.dir, 90) * 0.1;
+		map->player.pos.y -= get_move_y(map->player.dir, 90) * 0.1;
+	}
 	if (key == E_W)
 	{
-		map->player.pos.x += 0.1;
-		map->player.pos.y += 0.1;
+		map->player.pos.x += map->player.dir.x * 0.1;
+		map->player.pos.y += map->player.dir.y * 0.1;
 	}
 	if (key == E_S)
 	{
-		// map->player.pos.x -= dir;
-		map->player.pos.y -= 0.1;
+		map->player.pos.x -= map->player.dir.x * 0.1;
+		map->player.pos.y -= map->player.dir.y * 0.1;
 	}
 	if (key == E_RIGHT)
-		rotSpeed += 0.1;
+		map->player.angle += 0.1;
 	if (key == E_LEFT)
-		rotSpeed -= 0.1;
+		map->player.angle -= 0.1;
+	if (key == E_EXIT)
+	{
+		mlx_destroy_window(mlx, mlx_win);
+		exit(0);
+	}
 	mlx_clear_window(mlx, mlx_win);
 	main_loop(map);
-	return(0);
+	return (0);
 }
 
 void	verLine(int x, int drawStart, int drawEnd)
@@ -169,43 +171,24 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 
 int	main_loop(t_map *map)
 {
-	mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
-	for (int j = 0 ; j < SCREEN_HEIGHT ; j++)
-	{
-		for (int i = 0; i < SCREEN_WIDTH ; i++)
-		{
-			if (j < SCREEN_HEIGHT / 2)
-				img_data[i + (j * size_line / 4)] = (220 << 16) + (90 << 8) + 15;
-			else
-				img_data[i + (j * size_line / 4)] = (225 * 255 * 255) + (30 * 255) + 0;
-		}
-	}
-	t_vector	dir;
-	t_vector	plane;
 	t_vector	ray_dir;
 	int			x;
 
-	dir.x = -1;
-	dir.y = 0;
-	plane.x = 0;
-	plane.y = 0.66;
-
-	//rotate
-	dir.x = dir.x * cos(rotSpeed) - dir.y * sin(rotSpeed);
-	dir.y = -1 * sin(rotSpeed) + dir.y * cos(rotSpeed);
-	plane.x = plane.x * cos(rotSpeed) - plane.y * sin(rotSpeed);
-	plane.y = 0 * sin(rotSpeed) + plane.y * cos(rotSpeed);
-	//rotate
+	map->player.dir.x = -1 * cos(map->player.angle);
+	map->player.dir.y = -1 * sin(map->player.angle);
+	map->player.plane.x = 0.66 * sin(map->player.angle);
+	map->player.plane.y = -0.66 * cos(map->player.angle);
 	
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
 		double camerax = 2 * x / (double)SCREEN_WIDTH - 1;
-		ray_dir.x = camerax * plane.x + dir.x;
-		ray_dir.y = camerax * plane.y + dir.y;
+		ray_dir.x = camerax * map->player.plane.x + map->player.dir.x;
+		ray_dir.y = camerax * map->player.plane.y + map->player.dir.y;
 		execute(map, ray_dir, x);
 		x++;
 	}
+	mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
 	return (0);
 }
 
