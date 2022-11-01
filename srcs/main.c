@@ -31,7 +31,7 @@ void	save_sprite_data(t_map *map)
 	i = 0;
 	while (i < 1)
 	{
-		mlx_init(img.mlx);
+		img.mlx = mlx_init();
 		img.img = mlx_xpm_file_to_image(img.mlx, map->texture_path[i], &img.x, &img.y);
 		if (img.img == NULL)
 			exit(ft_error("wrong texture_path path"));
@@ -55,7 +55,7 @@ void	set_mlx_win(t_map *map)
 	img->img_set = (int *)mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->size_line, &img->endian);
 	printf("%d %d %d\n", img->bits_per_pixel, img->size_line, img->endian);
-	// map->sprite_info = ft_calloc(4, sizeof(int **));
+	map->sprite_info = ft_calloc(4, sizeof(int **));
 }
 
 int	main(int ac, char **av)
@@ -76,7 +76,7 @@ int	main(int ac, char **av)
 	set_mlx_win(&map);
 	// save_sprite_data(&map);
 	printf("Success\n");
-	dda(&map);
+	execute_dda(&map);
 	// execute_mlx();
 	return (0);
 }

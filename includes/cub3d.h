@@ -58,11 +58,16 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
-typedef struct s_plane
+typedef struct s_dda
 {
-	double	x;
-	double	y;
-}	t_plane;
+	t_vector	delta;
+	t_vector	step;
+	t_vector	side;
+	t_vector	ray_dir;
+	int			map_x;
+	int			map_y;
+	int			check_wall;
+}	t_dda;
 
 typedef struct s_player
 {
@@ -111,10 +116,9 @@ int		set_arg(char **contents, t_map *map);
 int		get_arr_len(char **arr);
 void	ft_converter(char *line);
 void	set_map(t_map *map, char **contents);
+
 //test
 void	execute_mlx(double dis, int xpos, double hit_po);
-void	dda(t_map *map);
-void	draw_bg(t_map *map);
 
 // parse
 void	set_player_pos(t_map *map);
@@ -126,5 +130,21 @@ void	check_news(char **info, int w, int h);
 double	get_move_x(t_vector dir, double degree);
 double	get_move_y(t_vector dir, double degree);
 double	ft_dtor(double degree);
+
+//execute
+void	check_hit(t_dda *dda, t_map *map);
+void	draw_bg(t_map *map);
+void	draw_map(t_map *map, double distan, int x);
+void	execute(t_map *map, t_dda *dda, int x);
+double	get_ray_dist(t_dda *dda);
+void	key_wasd(int key, t_map *map);
+int		main_loop(t_map *map);
+int		on_key_press(int key, t_map *map);
+void	set_delta(t_map *map, t_dda *dda);
+void	set_side(t_dda *dda, t_map *map);
+int		stop_game(t_map *map);
+void	ver_line(int x, int draw_start, int draw_end, t_map *map);
+void	execute_dda(t_map *map);
+void	draw_bg(t_map *map);
 
 #endif
