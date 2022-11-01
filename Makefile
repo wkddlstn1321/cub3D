@@ -19,7 +19,8 @@ SRC_FILES = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c\
 		parse/set_player_pos.c parse/check_border.c  parse/check_news.c parse/check_type.c\
 		main.c init_contents.c set_arg.c set_map.c execute_dda.c\
 		test.c\
-		util.c util2.c
+		util.c util2.c \
+		execute/draw_bg.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC_FILES))
 OBJS = $(patsubst %.c,%.o,$(SRCS))

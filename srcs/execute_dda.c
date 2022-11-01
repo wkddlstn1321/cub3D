@@ -9,8 +9,7 @@ int y;
 
 int	main_loop(t_map *map);
 
-
-t_new_img dog;
+t_new_img	dog;
 
 int bits_per_pixel = 0;
 int size_line = 0;
@@ -18,18 +17,14 @@ int endian = 0;
 int	*data;
 int	*img_data;
 
-int	stop_game(void)
+int	stop_game(t_map *map)
 {
-	mlx_destroy_window(mlx, mlx_win);
-	exit(1);
+	mlx_destroy_window(map->img.mlx, map->img.win);
+	exit(0);
 }
 
-int	on_key_press(int key, t_map *map)
+void	key_wasd(int key, t_map *map)
 {
-	if (map->player.angle > 360 * (M_PI / 180))
-		map->player.angle = 0;
-	else if (map->player.angle < 0)
-		map->player.angle = 360 * (M_PI / 180);
 	if (key == E_D)
 	{
 		map->player.pos.x += get_move_x(map->player.dir, 90) * 0.1;
@@ -50,31 +45,36 @@ int	on_key_press(int key, t_map *map)
 		map->player.pos.x -= map->player.dir.x * 0.1;
 		map->player.pos.y -= map->player.dir.y * 0.1;
 	}
+}
+
+int	on_key_press(int key, t_map *map)
+{
+	if (map->player.angle > 360 * (M_PI / 180))
+		map->player.angle = 0;
+	else if (map->player.angle < 0)
+		map->player.angle = 360 * (M_PI / 180);
 	if (key == E_RIGHT)
 		map->player.angle += 0.1;
 	if (key == E_LEFT)
 		map->player.angle -= 0.1;
 	if (key == E_EXIT)
 	{
-		mlx_destroy_window(mlx, mlx_win);
+		mlx_destroy_window(map->img.mlx, map->img.win);
 		exit(0);
 	}
-	mlx_clear_window(mlx, mlx_win);
-	main_loop(map);
+	key_wasd(key, map);
 	return (0);
 }
 
-void	verLine(int x, int drawStart, int drawEnd)
+void	ver_line(int x, int draw_start, int draw_end, t_map *map)
 {
-	int a = 0;
-	for (int i = 0 ; i < SCREEN_HEIGHT ; i++)
+	int	i;
+
+	i = 0;
+	while (i++ < SCREEN_HEIGHT)
 	{
-		if (i > drawStart && i < drawEnd)
-		{
-			// img_data[x + i * size_line / 4] = find_color(&dog, w, line_h, a);
-			img_data[x + i * size_line / 4] = 0x0FFF00;
-			a++;
-		}
+		if (i > draw_start && i < draw_end)
+			map->img.img_set[x + i * map->img.size_line / 4] = 0x0FFF00;
 	}
 }
 
@@ -88,6 +88,7 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	int			map_x;
 	int			map_y;
 	int			cc;
+	t_vector	start_side_dis;
 
 	hit = 0;
 	map_x = (int)(map->player.pos.x);
@@ -117,7 +118,6 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	side.x = between.x * delta.x;
 	side.y = between.y * delta.y;
 
-	t_vector	start_side_dis;
 	start_side_dis.x = side.x;
 	start_side_dis.y = side.y;
 	while (hit == 0)
@@ -157,14 +157,19 @@ double	execute(t_map *map, t_vector ray_dir, int x)
 	distan *= (1 << 16);
 	distan = round(distan);
 	distan /= (1 << 16);
-	int	line_h = (int)(SCREEN_HEIGHT / distan);
-	int drawStart = SCREEN_HEIGHT / 2 - (line_h / 2);
-	if (drawStart < 0)
-		drawStart = 0;
-	int drawEnd = SCREEN_HEIGHT / 2 + (line_h / 2);
-	if (drawEnd > SCREEN_HEIGHT)
-		drawEnd = SCREEN_HEIGHT;
-	verLine(x, drawStart, drawEnd);
+	int	line_h;
+	int draw_start;
+	int draw_end;
+
+	line_h = (int)(SCREEN_HEIGHT / distan);
+	draw_start = SCREEN_HEIGHT / 2 - (line_h / 2);
+	if (draw_start < 0)
+		draw_start = 0;
+
+	draw_end = SCREEN_HEIGHT / 2 + (line_h / 2);
+	if (draw_end > SCREEN_HEIGHT)
+		draw_end = SCREEN_HEIGHT;
+	ver_line(x, draw_start, draw_end, map);
 	(void)x;
 	return (0);
 }
@@ -174,40 +179,61 @@ int	main_loop(t_map *map)
 	t_vector	ray_dir;
 	int			x;
 
+	draw_bg(map);
+
+	// mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
+	// for (int j = 0 ; j < SCREEN_HEIGHT ; j++)
+	// {
+	// 	for (int i = 0; i < SCREEN_WIDTH ; i++)
+	// 	{
+	// 		if (j < SCREEN_HEIGHT / 2)
+	// 			img_data[i + (j * size_line / 4)] = (220 << 16) + (90 << 8) + 15;
+	// 		else
+	// 			img_data[i + (j * size_line / 4)] = (225 * 255 * 255) + (30 * 255) + 0;
+	// 	}
+	// }
 	map->player.dir.x = -1 * cos(map->player.angle);
 	map->player.dir.y = -1 * sin(map->player.angle);
 	map->player.plane.x = 0.66 * sin(map->player.angle);
 	map->player.plane.y = -0.66 * cos(map->player.angle);
-	
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
-		double camerax = 2 * x / (double)SCREEN_WIDTH - 1;
-		ray_dir.x = camerax * map->player.plane.x + map->player.dir.x;
-		ray_dir.y = camerax * map->player.plane.y + map->player.dir.y;
+		double camera_X;
+
+		camera_X = 2 * x / (double)SCREEN_WIDTH - 1;
+		ray_dir.x = camera_X * map->player.plane.x + map->player.dir.x;
+		ray_dir.y = camera_X * map->player.plane.y + map->player.dir.y;
 		execute(map, ray_dir, x);
 		x++;
 	}
-	mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
+	mlx_put_image_to_window(map->img.mlx, map->img.win, map->img.img, 0, 0);
 	return (0);
 }
 
 void	dda(t_map *map)
 {
 	// t_new_img dog;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
-	dog.endian = 0;
-	dog.size_line = 0;
-	dog.bits_per_pixel = 0;
-	dog.img = mlx_xpm_file_to_image(mlx, img_path, &dog.x, &dog.y);
-	dog.img_set = (int *)mlx_get_data_addr(dog.img, &dog.bits_per_pixel, &dog.size_line, &dog.endian);
-	new_win = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	img_data = (int *)mlx_get_data_addr(new_win, &bits_per_pixel, &size_line, &endian);
-	main_loop(map);
-	mlx_loop_hook(mlx, &main_loop, map);
-	mlx_hook(mlx_win, 17, 0, stop_game, 0);
-	mlx_hook(mlx_win, 2, 0, on_key_press, map);
-	mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
-	mlx_loop(mlx);
+	// printf("%d %d %d\n", map->img.bits_per_pixel, map->img.size_line, map->img.endian);
+	// mlx = mlx_init();
+	// mlx_win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
+	// dog.endian = 0;
+	// dog.size_line = 0;
+	// dog.bits_per_pixel = 0;
+	// dog.img = mlx_xpm_file_to_image(mlx, img_path, &dog.x, &dog.y);
+	// dog.img_set = (int *)mlx_get_data_addr(dog.img, &dog.bits_per_pixel, &dog.size_line, &dog.endian);
+	// new_win = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	// img_data = (int *)mlx_get_data_addr(new_win, &bits_per_pixel, &size_line, &endian);
+	// main_loop(map);
+
+	mlx_hook(map->img.win, 17, 0, stop_game, map);
+	mlx_hook(map->img.win, 2, 0, on_key_press, map);
+	// mlx_put_image_to_window(map->img.mlx, map->img.win, map->img.img, 0, 0);
+	
+	// mlx_loop_hook(mlx, &main_loop, map);
+	// mlx_hook(mlx_win, 17, 0, stop_game, 0);
+	// mlx_hook(mlx_win, 2, 0, on_key_press, map);
+	// mlx_put_image_to_window(mlx, mlx_win, new_win, 0, 0);
+	mlx_loop_hook(map->img.mlx, &main_loop, map);
+	mlx_loop(map->img.mlx);
 }

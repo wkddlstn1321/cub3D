@@ -16,7 +16,9 @@
 
 typedef struct s_new_img
 {
+	void	*mlx;
 	void	*img;
+	void	*win;
 	int		*img_set;
 	int		bits_per_pixel;
 	int		size_line;
@@ -90,8 +92,8 @@ typedef struct s_map
 	int			h;
 	int			***sprite_info;
 	t_player	player;
-	t_img_info	img;
-	t_new_img	img_info;
+	t_img_info	img_gara;
+	t_new_img	img;
 }	t_map;
 
 typedef struct s_info
@@ -112,6 +114,8 @@ void	set_map(t_map *map, char **contents);
 //test
 void	execute_mlx(double dis, int xpos, double hit_po);
 void	dda(t_map *map);
+void	draw_bg(t_map *map);
+
 // parse
 void	set_player_pos(t_map *map);
 void	check_type(t_map *map, char **arr);

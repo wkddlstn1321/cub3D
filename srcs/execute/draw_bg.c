@@ -8,10 +8,10 @@ void	draw_bg(t_map *map)
 		for (int i = 0; i < SCREEN_WIDTH ; i++)
 		{
 			if (j < SCREEN_HEIGHT / 2)
-				map->img_data[i + (j * size_line / 4)]
+				map->img.img_set[i + (j * map->img.size_line / 4)]
 					= (220 << 16) + (90 << 8) + 15;
 			else
-				map->img_data[i + (j * size_line / 4)]
+				map->img.img_set[i + (j * map->img.size_line / 4)]
 					= (225 * 255 * 255) + (30 * 255) + 0;
 		}
 	}
