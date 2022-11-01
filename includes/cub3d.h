@@ -125,6 +125,8 @@ void	set_player_pos(t_map *map);
 void	check_type(t_map *map, char **arr);
 void	check_border(t_map *map);
 void	check_news(char **info, int w, int h);
+void	save_sprite_data(t_map *map);
+void	set_img(t_new_img *img, int	**sprite);
 
 // utils
 double	get_move_x(t_vector dir, double degree);
@@ -147,4 +149,6 @@ void	ver_line(int x, int draw_start, int draw_end, t_map *map);
 void	execute_dda(t_map *map);
 void	draw_bg(t_map *map);
 
+// images
+void	set_mlx_win(t_map *map);
 #endif

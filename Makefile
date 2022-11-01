@@ -16,12 +16,12 @@ HEAD = ./includes/cub3d.h
 
 SRC_PATH = srcs/
 SRC_FILES = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c\
-		parse/set_player_pos.c parse/check_border.c  parse/check_news.c parse/check_type.c\
+		parse/set_player_pos.c parse/check_border.c  parse/check_news.c parse/check_type.c parse/save_sprite_data.c\
 		main.c init_contents.c set_arg.c set_map.c execute_dda.c\
 		test.c\
 		util.c util2.c \
-		execute/draw_bg.c execute/check_hit.c execute/draw_map.c execute/execute.c execute/get_ray_dist.c execute/key_wasd.c execute/main_loop.c execute/on_key_press.c execute/set_delta.c execute/set_side.c execute/stop_game.c execute/ver_line.c
- 
+		execute/draw_bg.c execute/check_hit.c execute/draw_map.c execute/execute.c execute/get_ray_dist.c execute/key_wasd.c execute/main_loop.c execute/on_key_press.c execute/set_delta.c execute/set_side.c execute/stop_game.c execute/ver_line.c\
+		images/set_mlx_win.c
 SRCS = $(addprefix $(SRC_PATH), $(SRC_FILES))
 OBJS = $(patsubst %.c,%.o,$(SRCS))
 
