@@ -71,6 +71,8 @@ typedef struct s_dda
 	int			check_wall;
 	int			tex_step;
 	int			news;
+	int			draw_start;
+	int			draw_end;
 	double		wall_hit_point;
 }	t_dda;
 
@@ -130,8 +132,7 @@ void	set_player_pos(t_map *map);
 void	check_type(t_map *map, char **arr);
 void	check_border(t_map *map);
 void	check_news(char **info, int w, int h);
-void	save_sprite_data(t_map *map);
-void	set_img(t_new_img *img, int	**sprite);
+void	save_sprite_data(t_map *map, void *mlx);
 
 // utils
 double	get_move_x(t_vector dir, double degree);
@@ -153,6 +154,7 @@ int		stop_game(t_map *map);
 // void	ver_line(int x, int draw_start, int draw_end, t_map *map, t_dda *dda);
 void	execute_dda(t_map *map);
 void	draw_bg(t_map *map);
+void	set_sprite_col(int ***texture, t_map *map, t_dda *dda, double dis);
 
 // images
 void	set_mlx_win(t_map *map);

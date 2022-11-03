@@ -1,10 +1,10 @@
-NO /Users/daskim/Desktop/cub3D/imgs/no.xpm
-SO /Users/daskim/Desktop/cub3D/imgs/so.xpm
-WE /Users/daskim/Desktop/cub3D/imgs/we.xpm
-EA /Users/daskim/Desktop/cub3D/imgs/ea.xpm
+NO ./imgs/no.xpm
+SO ./imgs/so.xpm
+WE ./imgs/we.xpm
+EA ./imgs/ea.xpm
 
-F 220,90,15
-C 225,30,0
+F 00,255,00
+C 150,100,150
 
 111111111111111
 1100000010000001

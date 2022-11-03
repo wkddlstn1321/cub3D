@@ -5,6 +5,7 @@ int	main(int ac, char **av)
 	char	*file_name;
 	char	**contents;
 	t_map	map;
+	void	*mlx;
 
 	if (ac != 2)
 		return (ft_error("Wrong arguments  [./cub3D] [*.cub]"));
@@ -16,9 +17,8 @@ int	main(int ac, char **av)
 	check_news(map.map_info, map.w, map.h);
 	set_player_pos(&map);
 	set_mlx_win(&map);
-	save_sprite_data(&map);
-	printf("Success\n");
+	mlx = mlx_init();
+	save_sprite_data(&map, mlx);
 	execute_dda(&map);
-	// execute_mlx();
 	return (0);
 }

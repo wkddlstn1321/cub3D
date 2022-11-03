@@ -78,9 +78,4 @@ void	set_map(t_map *map, char **contents)
 	map->w = get_max_width(&(contents[map_start_idx]));
 	map->p_count = get_p_count(&(contents[map_start_idx]));
 	init_map_info(&(contents[map_start_idx]), map);
-	//test
-	// map->mlx = mlx_init();
-	// map->mlx_win = mlx_new_window(map->mlx,
-	// 		SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
-	//test
 }

@@ -1,6 +1,6 @@
 #include "includes/cub3d.h"
 
-void	set_img(t_new_img *img, int	**sprite)
+static void	set_img(t_new_img *img, int	**sprite)
 {
 	int		i;
 	int		j;
@@ -10,10 +10,10 @@ void	set_img(t_new_img *img, int	**sprite)
 	i = 0;
 	while (i < img->y)
 	{
-		j = 0;
 		sprite[i] = malloc(sizeof(int) * img->x);
 		if (sprite[i] == NULL)
 			exit(ft_error("malloc error"));
+		j = 0;
 		while (j < img->x)
 		{
 			sprite[i][j] = img->img_set[j + i * img->size_line / 4];
@@ -23,15 +23,15 @@ void	set_img(t_new_img *img, int	**sprite)
 	}
 }
 
-void	save_sprite_data(t_map *map)
+void	save_sprite_data(t_map *map, void *mlx)
 {
 	int			i;
 	t_new_img	img;
 
+	img.mlx = mlx;
 	i = 0;
 	while (i < 4)
 	{
-		img.mlx = mlx_init();
 		img.img
 			= mlx_xpm_file_to_image
 			(img.mlx, map->texture_path[i], &img.x, &img.y);
