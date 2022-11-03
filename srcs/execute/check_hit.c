@@ -2,12 +2,12 @@
 
 void	check_hit(t_dda *dda, t_map *map)
 {
-	t_vector	start_side_dis;
+	// t_vector	start_side_dis;
 	int			hit;
 
 	hit = 0;
-	start_side_dis.x = dda->side.x;
-	start_side_dis.y = dda->side.y;
+	// start_side_dis.x = dda->side.x;
+	// start_side_dis.y = dda->side.y;
 	while (hit == 0)
 	{
 		if (dda->side.x <= dda->side.y)

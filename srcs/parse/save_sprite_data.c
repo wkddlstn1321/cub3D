@@ -5,7 +5,7 @@ void	set_img(t_new_img *img, int	**sprite)
 	int		i;
 	int		j;
 
-	img->img_set = (int *)mlx_get_data_addr(img->mlx, &img->bits_per_pixel,
+	img->img_set = (int *)mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->size_line, &img->endian);
 	i = 0;
 	while (i < img->y)
@@ -29,7 +29,7 @@ void	save_sprite_data(t_map *map)
 	t_new_img	img;
 
 	i = 0;
-	while (i < 1)
+	while (i < 4)
 	{
 		img.mlx = mlx_init();
 		img.img

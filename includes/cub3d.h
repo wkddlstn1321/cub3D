@@ -64,9 +64,14 @@ typedef struct s_dda
 	t_vector	step;
 	t_vector	side;
 	t_vector	ray_dir;
+	int			texture_start;
+	int			line_h;
 	int			map_x;
 	int			map_y;
 	int			check_wall;
+	int			tex_step;
+	int			news;
+	double		wall_hit_point;
 }	t_dda;
 
 typedef struct s_player
@@ -80,9 +85,9 @@ typedef struct s_player
 typedef struct s_img_info
 {
 	int	**no;
+	int	**so;
 	int	**ea;
 	int	**we;
-	int	**so;
 }		t_img_info;
 
 typedef struct s_map
@@ -136,7 +141,7 @@ double	ft_dtor(double degree);
 //execute
 void	check_hit(t_dda *dda, t_map *map);
 void	draw_bg(t_map *map);
-void	draw_map(t_map *map, double distan, int x);
+void	draw_map(t_map *map, double distan, int x, t_dda *dda);
 void	execute(t_map *map, t_dda *dda, int x);
 double	get_ray_dist(t_dda *dda);
 void	key_wasd(int key, t_map *map);
@@ -145,7 +150,7 @@ int		on_key_press(int key, t_map *map);
 void	set_delta(t_map *map, t_dda *dda);
 void	set_side(t_dda *dda, t_map *map);
 int		stop_game(t_map *map);
-void	ver_line(int x, int draw_start, int draw_end, t_map *map);
+// void	ver_line(int x, int draw_start, int draw_end, t_map *map, t_dda *dda);
 void	execute_dda(t_map *map);
 void	draw_bg(t_map *map);
 

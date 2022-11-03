@@ -28,8 +28,8 @@ void	set_player_pos(t_map *map)
 			if (maze[y][x] == 'N' || maze[y][x] == 'E'
 				|| maze[y][x] == 'W' || maze[y][x] == 'S')
 			{
-				map->player.pos.y = y;
-				map->player.pos.x = x;
+				map->player.pos.y = y + 0.5; // + 0.5 test
+				map->player.pos.x = x + 0.5; // + 0.5 test
 				set_player_dir(map, maze[y][x]);
 				return ;
 			}

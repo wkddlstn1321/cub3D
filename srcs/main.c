@@ -16,7 +16,7 @@ int	main(int ac, char **av)
 	check_news(map.map_info, map.w, map.h);
 	set_player_pos(&map);
 	set_mlx_win(&map);
-	// save_sprite_data(&map);
+	save_sprite_data(&map);
 	printf("Success\n");
 	execute_dda(&map);
 	// execute_mlx();
