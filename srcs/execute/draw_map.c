@@ -23,8 +23,6 @@ static void	ver_line(int x, int draw_start, int draw_end, t_map *map, t_dda *dda
 				if (dda->ray_dir.y > 0)
 					x_pos = 64 - x_pos - 1;
 			}
-			if (s < 0)
-				s *= -1;
 			map->img.img_set[x + i * map->img.size_line / 4] = map->sprite_info[dda->news][s * 64 / dda->line_h][x_pos];
 			s++;
 		}
@@ -38,13 +36,12 @@ void	draw_map(t_map *map, double distan, int x, t_dda *dda)
 	int	draw_end;
 
 	line_h = (int)(SCREEN_HEIGHT / distan);
-	dda->tex_step = line_h / 64;
 	dda->texture_start = 0;
 	dda->line_h = line_h;
 	draw_start = (SCREEN_HEIGHT / 2) - (line_h / 2);
 	if (draw_start < 0)
 	{
-		dda->texture_start = draw_start / dda->tex_step;		
+		dda->texture_start = -draw_start;		
 		// printf("start %d\n", dda->texture_start);
 		draw_start = 0;
 	}

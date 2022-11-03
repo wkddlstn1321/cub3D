@@ -1,7 +1,7 @@
-NO /Users/insjang/cub3D/imgs/no.xpm
-SO /Users/insjang/cub3D/imgs/so.xpm
-WE /Users/insjang/cub3D/imgs/we.xpm
-EA /Users/insjang/cub3D/imgs/ea.xpm
+NO /Users/daskim/Desktop/cub3D/imgs/no.xpm
+SO /Users/daskim/Desktop/cub3D/imgs/so.xpm
+WE /Users/daskim/Desktop/cub3D/imgs/we.xpm
+EA /Users/daskim/Desktop/cub3D/imgs/ea.xpm
 
 F 220,90,15
 C 225,30,0
@@ -14,7 +14,7 @@ C 225,30,0
 1111011000000001
 1000000000000001
 1000000000000001
-100001000W000001
+1000010W0000001
 1000011110000001
 1000000000000001
 111111111111111
