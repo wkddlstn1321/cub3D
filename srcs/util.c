@@ -2,10 +2,9 @@
 
 int	ft_error(char *str)
 {
-	printf("Error\n");
-	printf("%s\n", str);
-	// system("leaks cub3D");
-	return (1); 
+	printf("Error\n%s\n", str);
+	system("leaks cub3D");
+	return (1);
 }
 
 void	ft_converter(char *line)
@@ -43,4 +42,9 @@ int	get_arr_len(char **arr)
 	while (arr != NULL && arr[len] != NULL)
 		len++;
 	return (len);
+}
+
+double	ft_dtor(double degree)
+{
+	return (degree * M_PI / 180);
 }

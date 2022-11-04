@@ -6,7 +6,7 @@ static	void	init_map_info(char **contents, t_map *map)
 
 	i = 0;
 	if (map->h == 0)
-		exit(ft_error("no map"));
+		exit(ft_error("There is no map."));
 	map->map_info = calloc(sizeof(char *), (map->h + 1));
 	if (map->map_info == NULL)
 		exit(ft_error("malloc error"));
@@ -23,7 +23,7 @@ static	void	init_map_info(char **contents, t_map *map)
 	}
 }
 
-static	int	get_p_count(char **contents)
+static	void	check_p_count(char **contents)
 {
 	int	x;
 	int	y;
@@ -44,8 +44,7 @@ static	int	get_p_count(char **contents)
 		y++;
 	}
 	if (p_count != 1)
-		exit(ft_error("too many players"));
-	return (p_count);
+		exit(ft_error("There is not a single player."));
 }
 
 static	int	get_max_width(char **contents)
@@ -71,11 +70,11 @@ void	set_map(t_map *map, char **contents)
 {
 	int	map_start_idx;
 
-	map->texture = ft_calloc(sizeof(char *), 5);
+	map->texture_path = ft_calloc(sizeof(char *), 5);
 	map->rgb = ft_calloc(sizeof(int *), 2);
 	map_start_idx = set_arg(contents, map);
 	map->h = get_arr_len(&(contents[map_start_idx]));
 	map->w = get_max_width(&(contents[map_start_idx]));
-	map->p_count = get_p_count(&(contents[map_start_idx]));
 	init_map_info(&(contents[map_start_idx]), map);
+	check_p_count(&(contents[map_start_idx]));
 }

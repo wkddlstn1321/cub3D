@@ -7,7 +7,7 @@ static void	check_arg_input_value(t_map *map)
 	i = 0;
 	while (i < 4)
 	{
-		if (map->texture[i] == NULL)
+		if (map->texture_path[i] == NULL)
 			exit(ft_error("texture is null"));
 		i++;
 	}
