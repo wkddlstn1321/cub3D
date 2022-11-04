@@ -9,12 +9,21 @@
 # include "get_next_line.h"
 # include <math.h>
 
-# define MAP_EXTENSION				".cub"
-# define SCREEN_WIDTH	1920
-# define SCREEN_HEIGHT	1080
-# define GRID_SIZE	128
+# define MAP_EXTENSION	".cub"
+# define SCREEN_W		1920
+# define SCREEN_H		1080
 
-typedef struct s_new_img
+typedef struct s_key_event
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	l;
+	int	r;
+}	t_key_event;
+
+typedef struct s_mlx_info
 {
 	void	*mlx;
 	void	*img;
@@ -25,32 +34,32 @@ typedef struct s_new_img
 	int		endian;
 	int		x;
 	int		y;
-}	t_new_img;
+}	t_mlx_info;
 
 typedef enum e_key_types
 {
-	E_W = 13,
-	E_A = 0,
-	E_S = 1,
-	E_D = 2,
-	E_LEFT = 123,
-	E_RIGHT = 124,
-	E_EXIT = 53,
+	W = 13,
+	A = 0,
+	S = 1,
+	D = 2,
+	LEFT = 123,
+	RIGHT = 124,
+	EXIT = 53,
 }	t_key_types;
 
-typedef enum e_texture_types
+typedef enum e_spr_dir
 {
-	E_NO = 0,
-	E_SO,
-	E_EA,
-	E_WE,
-}	t_texture_types;
+	NO = 0,
+	SO,
+	EA,
+	WE,
+}	t_spr_dir;
 
-typedef enum e_rgb_types
+typedef enum e_bg
 {
-	E_F = 0,
-	E_C
-}	t_rgb_types;
+	F = 0,
+	C
+}	t_bg;
 
 typedef struct s_vector
 {
@@ -64,15 +73,15 @@ typedef struct s_dda
 	t_vector	step;
 	t_vector	side;
 	t_vector	ray_dir;
-	int			texture_start;
+	int			spr_start;
 	int			line_h;
 	int			map_x;
 	int			map_y;
 	int			check_wall;
-	int			tex_step;
-	int			news;
+	int			spr_dir;
 	int			draw_start;
 	int			draw_end;
+	int			xy[4][2];
 	double		wall_hit_point;
 }	t_dda;
 
@@ -84,37 +93,21 @@ typedef struct s_player
 	double		angle;
 }	t_player;
 
-typedef struct s_img_info
-{
-	int	**no;
-	int	**so;
-	int	**ea;
-	int	**we;
-}		t_img_info;
-
 typedef struct s_map
 {
 	void		*mlx_win;
 	void		*mlx;
-	int			p_count;
 	char		**map_info;
 	char		**texture_path;
 	int			**rgb;
 	int			w;
 	int			h;
 	int			***sprite_info;
+	int			xy[4][2];
 	t_player	player;
-	t_img_info	img_gara;
-	t_new_img	img;
+	t_mlx_info	spr;
+	t_key_event	event;
 }	t_map;
-
-typedef struct s_info
-{
-	void		*mlx;
-	void		*mlx_win;
-	void		*new_win;
-	void		*img;
-}		t_info;
 
 int		ft_error(char *str);
 void	check_extension(char *dir);
@@ -123,9 +116,6 @@ int		set_arg(char **contents, t_map *map);
 int		get_arr_len(char **arr);
 void	ft_converter(char *line);
 void	set_map(t_map *map, char **contents);
-
-//test
-void	execute_mlx(double dis, int xpos, double hit_po);
 
 // parse
 void	set_player_pos(t_map *map);
@@ -141,17 +131,15 @@ double	ft_dtor(double degree);
 
 //execute
 void	check_hit(t_dda *dda, t_map *map);
-void	draw_bg(t_map *map);
 void	draw_map(t_map *map, double distan, int x, t_dda *dda);
 void	execute(t_map *map, t_dda *dda, int x);
 double	get_ray_dist(t_dda *dda);
-void	key_wasd(int key, t_map *map);
+void	key_wasd(t_map *map);
 int		main_loop(t_map *map);
-int		on_key_press(int key, t_map *map);
+int		on_key_press(t_map *map);
 void	set_delta(t_map *map, t_dda *dda);
 void	set_side(t_dda *dda, t_map *map);
 int		stop_game(t_map *map);
-// void	ver_line(int x, int draw_start, int draw_end, t_map *map, t_dda *dda);
 void	execute_dda(t_map *map);
 void	draw_bg(t_map *map);
 void	set_sprite_col(int ***texture, t_map *map, t_dda *dda, double dis);

@@ -7,17 +7,17 @@ void	draw_bg(t_map *map)
 	int	j;
 
 	i = 0;
-	while (i < SCREEN_HEIGHT)
+	while (i < SCREEN_H)
 	{
 		j = 0;
-		while (j < SCREEN_WIDTH)
+		while (j < SCREEN_W)
 		{
-			if (i < SCREEN_HEIGHT / 2)
-				map->img.img_set[j + (i * map->img.size_line / 4)]
+			if (i < SCREEN_H / 2)
+				map->spr.img_set[j + (i * map->spr.size_line / 4)]
 					= (map->rgb[0][0] << 16)
 					+ (map->rgb[0][1] << 8) + map->rgb[0][2];
 			else
-				map->img.img_set[j + (i * map->img.size_line / 4)]
+				map->spr.img_set[j + (i * map->spr.size_line / 4)]
 					= (map->rgb[1][0] << 16)
 					+ (map->rgb[1][1] << 8) + map->rgb[1][2];
 			j++;

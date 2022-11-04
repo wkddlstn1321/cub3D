@@ -1,43 +1,60 @@
 #include "includes/cub3d.h"
 
-//대각으로 나가면 맵 밖으로 나가짐 수정 필요
-void	key_wasd(int key, t_map *map)
+static	void	key_w(t_map *map, double speed, double dis, char **maze)
+{
+	if (maze[(int)(map->player.pos.y + map->player.dir.y * dis)] \
+		[(int)(map->player.pos.x)] != '1')
+		map->player.pos.y += map->player.dir.y * speed;
+	if (maze[(int)(map->player.pos.y)] \
+		[(int)(map->player.pos.x + map->player.dir.x * dis)] != '1')
+		map->player.pos.x += map->player.dir.x * speed;
+}
+
+static	void	key_a(t_map *map, double speed, double dis, char **maze)
+{
+	if (maze[(int)(map->player.pos.y - get_move_y(map->player.dir, 90) * dis)] \
+	[(int)(map->player.pos.x)] != '1')
+		map->player.pos.y -= get_move_y(map->player.dir, 90) * speed;
+	if (maze[(int)(map->player.pos.y)][(int)(map->player.pos.x \
+		- get_move_x(map->player.dir, 90) * dis)] != '1')
+		map->player.pos.x -= get_move_x(map->player.dir, 90) * speed;
+}
+
+static	void	key_s(t_map *map, double speed, double dis, char **maze)
+{
+	if (maze[(int)(map->player.pos.y - map->player.dir.y * dis)] \
+		[(int)(map->player.pos.x)] != '1')
+		map->player.pos.y -= map->player.dir.y * speed;
+	if (maze[(int)(map->player.pos.y)] \
+		[(int)(map->player.pos.x - map->player.dir.x * dis)] != '1')
+		map->player.pos.x -= map->player.dir.x * speed;
+}
+
+static	void	key_d(t_map *map, double speed, double dis, char **maze)
+{
+	if (maze[(int)(map->player.pos.y + get_move_y(map->player.dir, 90) * dis)] \
+		[(int)(map->player.pos.x)] != '1')
+		map->player.pos.y += get_move_y(map->player.dir, 90) * speed;
+	if (maze[(int)(map->player.pos.y)][(int)(map->player.pos.x \
+		+ get_move_x(map->player.dir, 90) * dis)] != '1')
+		map->player.pos.x += get_move_x(map->player.dir, 90) * speed;
+}
+
+void	key_wasd(t_map *map)
 {
 	char	**maze;
+	double	dis;
+	double	speed;
 
+	dis = 0.3;
+	speed = 0.05;
 	maze = map->map_info;
-	if (key == E_W)
-	{
-		if (maze[(int)(map->player.pos.y + map->player.dir.y * 0.3)][(int)(map->player.pos.x + map->player.dir.x * 0.3)] != '1')
-		{
-			map->player.pos.x += map->player.dir.x * 0.1;
-			map->player.pos.y += map->player.dir.y * 0.1;
-		}
-
-	}
-	if (key == E_A)
-	{
-		if (maze[(int)(map->player.pos.y - get_move_y(map->player.dir, 90) * 0.3)][(int)(map->player.pos.x -get_move_x(map->player.dir, 90) * 0.3)] != '1')
-		{
-			map->player.pos.x -= get_move_x(map->player.dir, 90) * 0.1;
-			map->player.pos.y -= get_move_y(map->player.dir, 90) * 0.1;
-		}
-
-	}
-	if (key == E_S)
-	{
-		if (maze[(int)(map->player.pos.y - map->player.dir.y * 0.3)][(int)(map->player.pos.x - map->player.dir.x * 0.3)] != '1')
-		{
-			map->player.pos.x -= map->player.dir.x * 0.1;
-			map->player.pos.y -= map->player.dir.y * 0.1;
-		}
-	}
-	if (key == E_D)
-	{
-		if (maze[(int)(map->player.pos.y +  get_move_y(map->player.dir, 90) * 0.3)][(int)(map->player.pos.x + get_move_x(map->player.dir, 90) * 0.3)] != '1')
-		{
-			map->player.pos.x += get_move_x(map->player.dir, 90) * 0.1;
-			map->player.pos.y += get_move_y(map->player.dir, 90) * 0.1;
-		}
-	}
+	if (map->event.w == 1)
+		key_w(map, speed, dis, maze);
+	if (map->event.a == 1)
+		key_a(map, speed, dis, maze);
+	if (map->event.s == 1)
+		key_s(map, speed, dis, maze);
+	if (map->event.d == 1)
+		key_d(map, speed, dis, maze);
 }

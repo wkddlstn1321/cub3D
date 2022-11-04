@@ -2,13 +2,15 @@
 
 void	set_mlx_win(t_map *map)
 {
-	t_new_img	*img;
+	t_mlx_info	*screen;
 
-	img = &map->img;
-	img->mlx = mlx_init();
-	img->win = mlx_new_window(img->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
-	img->img = mlx_new_image(img->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	img->img_set = (int *)mlx_get_data_addr(img->img, &img->bits_per_pixel,
-			&img->size_line, &img->endian);
+	screen = &map->spr;
+	screen->mlx = mlx_init();
+	screen->win = mlx_new_window(screen->mlx, \
+		SCREEN_W, SCREEN_H, "cub3D");
+	screen->img = mlx_new_image(screen->mlx, SCREEN_W, SCREEN_H);
+	screen->img_set = (int *)mlx_get_data_addr(screen->img, \
+		&screen->bits_per_pixel,
+			&screen->size_line, &screen->endian);
 	map->sprite_info = ft_calloc(4, sizeof(int **));
 }

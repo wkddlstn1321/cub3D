@@ -6,13 +6,13 @@ void	get_hit_wall_col(int ***texture, t_map *map, t_dda *dda, double dis)
 
 	if (dda->ray_dir.x < 0)
 	{
-		*texture = map->sprite_info[E_EA];
-		dda->news = E_EA;
+		*texture = map->sprite_info[EA];
+		dda->spr_dir = EA;
 	}
 	else
 	{
-		*texture = map->sprite_info[E_WE];
-		dda->news = E_WE;
+		*texture = map->sprite_info[WE];
+		dda->spr_dir = WE;
 	}
 	wallx = map->player.pos.y + dis * dda->ray_dir.y;
 	dda->wall_hit_point = wallx - floor(wallx);
@@ -24,13 +24,13 @@ void	get_hit_wall_row(int ***texture, t_map *map, t_dda *dda, double dis)
 
 	if (dda->ray_dir.y < 0)
 	{
-		*texture = map->sprite_info[E_SO];
-		dda->news = E_SO;
+		*texture = map->sprite_info[SO];
+		dda->spr_dir = SO;
 	}
 	else
 	{
-		*texture = map->sprite_info[E_NO];
-		dda->news = E_NO;
+		*texture = map->sprite_info[NO];
+		dda->spr_dir = NO;
 	}
 	wallx = map->player.pos.x + dis * dda->ray_dir.x;
 	dda->wall_hit_point = wallx - floor(wallx);

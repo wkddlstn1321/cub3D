@@ -17,14 +17,14 @@ void	check_border(t_map *map)
 			while (maze[y][x] != '\0')
 			{
 				if (maze[y][x] != ' ' && maze[y][x] != '1')
-					exit(ft_error("border errrrrr"));
+					exit(ft_error("Border is not satisfied."));
 				x++;
 			}
 		}
 		else
 			if ((maze[y][0] != '1' && maze[y][0] != ' ')
 				|| (maze[y][map->w - 1] != '1' && maze[y][map->w - 1] != ' '))
-				exit(ft_error("border errrrrr"));
+				exit(ft_error("Border is not satisfied."));
 		y++;
 	}
 }

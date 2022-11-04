@@ -1,6 +1,6 @@
 #include "includes/cub3d.h"
 
-static void	set_img(t_new_img *img, int	**sprite)
+static void	set_img(t_mlx_info *img, int	**sprite)
 {
 	int		i;
 	int		j;
@@ -26,7 +26,7 @@ static void	set_img(t_new_img *img, int	**sprite)
 void	save_sprite_data(t_map *map, void *mlx)
 {
 	int			i;
-	t_new_img	img;
+	t_mlx_info	img;
 
 	img.mlx = mlx;
 	i = 0;
@@ -41,6 +41,8 @@ void	save_sprite_data(t_map *map, void *mlx)
 		if (map->sprite_info[i] == NULL)
 			exit(ft_error("malloc error"));
 		set_img(&img, map->sprite_info[i]);
+		map->xy[i][0] = img.x;
+		map->xy[i][1] = img.y;
 		mlx_destroy_image(img.mlx, img.img);
 		i++;
 	}
