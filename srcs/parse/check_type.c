@@ -80,5 +80,5 @@ void	check_type(t_map *map, char **arr)
 	else if (ft_strcmp("C", arr[0]) == 0)
 		set_rgb(arr, map->rgb, C);
 	else
-		exit(ft_error("FUCK YOU"));
+		exit(ft_error("map or parse error"));
 }

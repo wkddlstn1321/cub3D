@@ -36,7 +36,7 @@ void	save_sprite_data(t_map *map, void *mlx)
 			= mlx_xpm_file_to_image
 			(img.mlx, map->texture_path[i], &img.x, &img.y);
 		if (img.img == NULL)
-			exit(ft_error("wrong texture_path path"));
+			exit(ft_error("wrong texture path"));
 		map->sprite_info[i] = malloc(sizeof(int *) * img.y);
 		if (map->sprite_info[i] == NULL)
 			exit(ft_error("malloc error"));

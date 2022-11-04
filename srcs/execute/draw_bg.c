@@ -1,6 +1,5 @@
 #include "includes/cub3d.h"
 
-//	map에 이미지 데이터 추가하기
 void	draw_bg(t_map *map)
 {
 	int	i;

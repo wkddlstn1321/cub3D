@@ -3,7 +3,6 @@
 int	ft_error(char *str)
 {
 	printf("Error\n%s\n", str);
-	system("leaks cub3D");
 	return (1);
 }
 

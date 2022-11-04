@@ -1,17 +1,12 @@
-
 NAME = cub3D 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I includes -I libft -I .
 LINK = -L ./libft -l ft -L./mlx -lmlx -framework OpenGL -framework AppKit
 LIBFTPATH = ./Libft
 RM = rm -f
 MAKE = make
 
-ifeq ($(DEBUG), TRUE)
-	CFLAGS -= -Werror
-endif
-#head
 HEAD = ./includes/cub3d.h
 
 SRC_PATH = srcs/
@@ -28,7 +23,7 @@ OBJS = $(patsubst %.c,%.o,$(SRCS))
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(NAME): $(OBJS) $(HEAD)
-	$(MAKE) -C $(LIBFTPATH) BONUS_RULE=TRUE all
+	$(MAKE) -C $(LIBFTPATH)
 	$(CC) $(CFLAGS) $(LINK) $(OBJS) -o $@
 
 all: $(NAME)

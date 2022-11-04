@@ -1,6 +1,5 @@
 #include "includes/cub3d.h"
 
-//미로 테두리 확인
 void	check_border(t_map *map)
 {
 	int		y;

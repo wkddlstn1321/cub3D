@@ -1,6 +1,5 @@
 #include "includes/cub3d.h"
 
-// 미로 내부 값들 확인
 void	check_news(char **info, int w, int h)
 {
 	int		x;
