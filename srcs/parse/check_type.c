@@ -75,7 +75,7 @@ void	check_type(t_map *map, char **arr)
 		set_texture(arr, map->texture_path, EA);
 	else if (ft_strcmp("WE", arr[0]) == 0)
 		set_texture(arr, map->texture_path, WE);
-	else if (ft_strncmp(arr[0], "F", 2) == 0)
+	else if (ft_strcmp("F", arr[0]) == 0)
 		set_rgb(arr, map->rgb, F);
 	else if (ft_strcmp("C", arr[0]) == 0)
 		set_rgb(arr, map->rgb, C);

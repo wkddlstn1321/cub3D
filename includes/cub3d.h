@@ -95,8 +95,6 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	void		*mlx_win;
-	void		*mlx;
 	char		**map_info;
 	char		**texture_path;
 	int			**rgb;
