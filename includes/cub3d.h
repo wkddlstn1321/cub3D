@@ -81,7 +81,6 @@ typedef struct s_dda
 	int			spr_dir;
 	int			draw_start;
 	int			draw_end;
-	int			xy[4][2];
 	double		wall_hit_point;
 }	t_dda;
 
@@ -128,19 +127,15 @@ double	get_move_y(t_vector dir, double degree);
 double	ft_dtor(double degree);
 
 //execute
-void	check_hit(t_dda *dda, t_map *map);
 void	draw_map(t_map *map, double dist, int x, t_dda *dda);
 void	execute(t_map *map, t_dda *dda, int x);
-double	get_ray_dist(t_map *map, t_dda *dda);
 void	key_wasd(t_map *map);
 int		main_loop(t_map *map);
 int		on_key_press(t_map *map);
 void	set_delta(t_map *map, t_dda *dda);
-void	set_side(t_dda *dda, t_map *map);
 int		stop_game(t_map *map);
 void	execute_dda(t_map *map);
 void	draw_bg(t_map *map);
-void	set_sprite_col(int ***texture, t_map *map, t_dda *dda, double dist);
 
 // images
 void	set_mlx_win(t_map *map);

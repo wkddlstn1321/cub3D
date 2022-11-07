@@ -1,11 +1,11 @@
 #include "includes/cub3d.h"
 
-static int	get_x_pos(t_dda *dda)
+static int	get_x_pos(t_map *map, t_dda *dda)
 {
 	int	x_pos;
 	int	sprite_x_size;
 
-	sprite_x_size = dda->xy[dda->spr_dir][0];
+	sprite_x_size = map->xy[dda->spr_dir][0];
 	x_pos = dda->wall_hit_point * sprite_x_size;
 	if (dda->check_wall == 0)
 	{
@@ -32,29 +32,11 @@ static void	ver_line(int x, t_map *map, t_dda *dda)
 	{
 		if (i >= dda->draw_start && i < dda->draw_end)
 		{
-			x_pos = get_x_pos(dda);
+			x_pos = get_x_pos(map, dda);
 			map->spr.img_set[x + i * map->spr.size_line / 4]
-				= map->sprite_info[dda->spr_dir][s * dda->xy \
+				= map->sprite_info[dda->spr_dir][s * map->xy \
 				[dda->spr_dir][1] / dda->line_h][x_pos];
 			s++;
-		}
-		i++;
-	}
-}
-
-void	asd(t_map *map, t_dda *dda)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 2)
-		{
-			dda->xy[i][j] = map->xy[i][j];
-			j++;
 		}
 		i++;
 	}
@@ -66,7 +48,6 @@ void	draw_map(t_map *map, double dist, int x, t_dda *dda)
 	int	draw_start;
 	int	draw_end;
 
-	asd(map, dda);
 	line_h = (int)(SCREEN_H / dist);
 	dda->spr_start = 0;
 	dda->line_h = line_h;

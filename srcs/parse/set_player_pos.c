@@ -1,13 +1,13 @@
 #include "includes/cub3d.h"
 
 static	void	set_player_dir(t_map *map, char c)
-{	
+{
 	if (c == 'N')
-		map->player.angle = 90 * M_PI / 180;
+		map->player.angle = ft_dtor(90);
 	else if (c == 'E')
-		map->player.angle = 180 * M_PI / 180;
+		map->player.angle = ft_dtor(180);
 	else if (c == 'S')
-		map->player.angle = 270 * M_PI / 180;
+		map->player.angle = ft_dtor(270);
 	else if (c == 'W')
 		map->player.angle = 0;
 }
