@@ -60,14 +60,14 @@ void	asd(t_map *map, t_dda *dda)
 	}
 }
 
-void	draw_map(t_map *map, double distan, int x, t_dda *dda)
+void	draw_map(t_map *map, double dist, int x, t_dda *dda)
 {
 	int	line_h;
 	int	draw_start;
 	int	draw_end;
 
 	asd(map, dda);
-	line_h = (int)(SCREEN_H / distan);
+	line_h = (int)(SCREEN_H / dist);
 	dda->spr_start = 0;
 	dda->line_h = line_h;
 	draw_start = (SCREEN_H / 2) - (line_h / 2);

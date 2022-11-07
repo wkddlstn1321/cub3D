@@ -1,21 +1,18 @@
 #include "includes/cub3d.h"
 
-double	get_ray_dist(t_dda *dda)
+double	get_ray_dist(t_map *map, t_dda *dda)
 {
-	double	distan;
+	double	dist;
 
 	if (dda->check_wall == 0)
 	{
-		distan = dda->side.x - dda->delta.x;
-		distan *= 1 / sqrt(pow(dda->ray_dir.x, 2) + pow(dda->ray_dir.y, 2));
+		dist = (dda->map_x - map->player.pos.x \
+		+ (1 - dda->step.x) / 2) / dda->ray_dir.x;
 	}
 	else
 	{
-		distan = dda->side.y - dda->delta.y;
-		distan *= 1 / sqrt(pow(dda->ray_dir.x, 2) + pow(dda->ray_dir.y, 2));
+		dist = (dda->map_y - map->player.pos.y \
+		+ (1 - dda->step.y) / 2) / dda->ray_dir.y;
 	}
-	distan *= (1 << 16);
-	distan = round(distan);
-	distan /= (1 << 16);
-	return (distan);
+	return (dist);
 }

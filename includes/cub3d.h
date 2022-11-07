@@ -129,9 +129,9 @@ double	ft_dtor(double degree);
 
 //execute
 void	check_hit(t_dda *dda, t_map *map);
-void	draw_map(t_map *map, double distan, int x, t_dda *dda);
+void	draw_map(t_map *map, double dist, int x, t_dda *dda);
 void	execute(t_map *map, t_dda *dda, int x);
-double	get_ray_dist(t_dda *dda);
+double	get_ray_dist(t_map *map, t_dda *dda);
 void	key_wasd(t_map *map);
 int		main_loop(t_map *map);
 int		on_key_press(t_map *map);
@@ -140,7 +140,7 @@ void	set_side(t_dda *dda, t_map *map);
 int		stop_game(t_map *map);
 void	execute_dda(t_map *map);
 void	draw_bg(t_map *map);
-void	set_sprite_col(int ***texture, t_map *map, t_dda *dda, double dis);
+void	set_sprite_col(int ***texture, t_map *map, t_dda *dda, double dist);
 
 // images
 void	set_mlx_win(t_map *map);
