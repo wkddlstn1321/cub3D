@@ -13,12 +13,12 @@ void	draw_bg(t_map *map)
 		{
 			if (i < SCREEN_H / 2)
 				map->spr.img_set[j + (i * map->spr.size_line / 4)]
-					= (map->rgb[0][0] << 16)
-					+ (map->rgb[0][1] << 8) + map->rgb[0][2];
+					= (map->rgb[1][0] << 16)
+					+ (map->rgb[1][1] << 8) + map->rgb[0][2];
 			else
 				map->spr.img_set[j + (i * map->spr.size_line / 4)]
-					= (map->rgb[1][0] << 16)
-					+ (map->rgb[1][1] << 8) + map->rgb[1][2];
+					= (map->rgb[0][0] << 16)
+					+ (map->rgb[0][1] << 8) + map->rgb[1][2];
 			j++;
 		}
 		i++;
